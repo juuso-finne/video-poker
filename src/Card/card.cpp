@@ -1,5 +1,6 @@
 #include "card.h"
 #include <stdexcept>
+#include <raymath.h>
 
 Card::Card(){
 }
@@ -12,6 +13,9 @@ Card::Card(Vector2 position, int rank, Suit suit, const Texture2D &spritesheet, 
     }
 
     position_ = position;
+    destination_ = {0,0};
+    speed_ = 0;
+    is_moving_ = false;
     rank_ = rank;
     suit_ = suit;
     suit_index_ = static_cast<int>(suit);
@@ -39,6 +43,28 @@ void Card::FaceUp(){
 
 void Card::FaceDown(){
     is_visible_ = false;
+}
+
+void Card::Move(const Vector2 &destination, float speed){
+    is_moving_ = true;
+    destination_ = destination;
+    speed_ = speed;
+}
+
+bool Card::IsMoving(){
+    return is_moving_;
+}
+
+void Card::Update(){
+    if(is_moving_){
+        position_ = Vector2MoveTowards(position_, destination_, speed_);
+        is_moving_ = Vector2Equals(position_, destination_) == 0;
+    }
+}
+
+void Card::UpdateAndDraw(){
+    Update();
+    Draw();
 }
 
 Joker::Joker(Vector2 position, const Texture2D &spritesheet, bool is_visible){
