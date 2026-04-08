@@ -11,7 +11,6 @@ enum class Suit{
 
 class Card{
     public:
-        Card();
         Card(Vector2 position, int rank, Suit suit, const Texture2D &spritesheet, bool is_visible = false);
         void Draw();
         void FaceUp();
