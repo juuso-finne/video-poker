@@ -1,9 +1,9 @@
 #pragma once
 #include<raylib.h>
 #include <string>
+#include <map>
+#include <vector>
 
-constexpr int kButtonWidth = 100;
-constexpr int kButtonHeight = 50;
 
 enum class ButtonType{
     kDeal,
@@ -17,44 +17,57 @@ enum class ButtonType{
 
 class Button{
     public:
-        Button(const Vector2 &position);
+        Button();
         ButtonType type_;
         Rectangle bounds_;
         const char *text_;
-    private:
+    protected:
+        float width_;
+        float height_;
+        int padding_;
 };
 
 class DealButton: public Button{
     public:
-        DealButton(const Vector2 &position);
+        DealButton();
+        int GetIndex();
+    private:
+        int index_;
 };
 
 class BetButton: public Button{
     public:
-        BetButton(const Vector2 &position);
+        BetButton();
 };
 
 class HoldButton: public Button{
     public:
-        HoldButton(const Vector2 &position);
+        HoldButton(int index);
+        int GetIndex();
+    private:
+        int index_;
 };
 
 class CashOutButton: public Button{
     public:
-        CashOutButton(const Vector2 &position);
+        CashOutButton();
 };
 
 class DoubleButton: public Button{
     public:
-        DoubleButton(const Vector2 &position);
+        DoubleButton();
 };
 
 class SmallButton: public Button{
     public:
-        SmallButton(const Vector2 &position);
+        SmallButton();
 };
 
 class BigButton: public Button{
     public:
-        BigButton(const Vector2 &position);
+        BigButton();
 };
+
+std::vector<Button> getButtons();
+std::vector<ButtonType> getButtonTypes();
+std::map<ButtonType, bool> getDefaultButtonMap();
