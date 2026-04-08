@@ -14,6 +14,9 @@ void Gui::Update(){
         } else{
             GuiDisable();
         }
-        button->clicked_ = GuiButton(button->bounds_, button->text_);
+
+        if(GuiButton(button -> bounds_, button -> text_)){
+            button -> OnClick();
+        }
     }
 }

@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "../Game/GameState/gameState.h"
 
 
 enum class ButtonType{
@@ -17,10 +18,14 @@ enum class ButtonType{
 
 class Button{
     public:
-        Button();
+        Button(GameState *game_state);
+        virtual void OnClick();
+
+        GameState *game_state_;
         ButtonType type_;
         Rectangle bounds_;
         const char *text_;
+        bool enabled_;
     protected:
         float width_;
         float height_;
@@ -29,20 +34,19 @@ class Button{
 
 class DealButton: public Button{
     public:
-        DealButton();
-        int GetIndex();
-    private:
-        int index_;
+        DealButton(GameState *game_state);
+        void OnClick() override;
 };
 
 class BetButton: public Button{
     public:
-        BetButton();
+        BetButton(GameState *game_state);
+        void OnClick() override;
 };
 
 class HoldButton: public Button{
     public:
-        HoldButton(int index);
+        HoldButton(int index, GameState *game_state);
         int GetIndex();
     private:
         int index_;
@@ -50,24 +54,20 @@ class HoldButton: public Button{
 
 class CashOutButton: public Button{
     public:
-        CashOutButton();
+        CashOutButton(GameState *game_state);
 };
 
 class DoubleButton: public Button{
     public:
-        DoubleButton();
+        DoubleButton(GameState *game_state);
 };
 
 class SmallButton: public Button{
     public:
-        SmallButton();
+        SmallButton(GameState *game_state);
 };
 
 class BigButton: public Button{
     public:
-        BigButton();
+        BigButton(GameState *game_state);
 };
-
-std::vector<Button> getButtons();
-std::vector<ButtonType> getButtonTypes();
-std::map<ButtonType, bool> getDefaultButtonMap();

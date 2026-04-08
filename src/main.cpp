@@ -14,6 +14,10 @@ int main()
 
     InitWindow(screenWidth, screenHeight, "Video poker");
     //Deck deck = {{-75, 300}, 1};
+    InitialState state{};
+    DealButton deal{&state};
+    BetButton bet{&state};
+    Gui g{{&deal, &bet}};
     SetTargetFPS(60);
 
 
@@ -32,6 +36,8 @@ int main()
         */
         BeginDrawing();
         ClearBackground(BLACK);
+
+        g.Update();
 
         /*
         for (std::vector<Card>::iterator it = cards.begin(); it != cards.end();)
