@@ -1,7 +1,7 @@
 #include <raylib.h>
 #include "Card/deck.h"
 #include "Gui/gui.h"
-#include <iostream>
+#include <memory>
 
 
 int main()
@@ -14,10 +14,10 @@ int main()
 
     InitWindow(screenWidth, screenHeight, "Video poker");
     //Deck deck = {{-75, 300}, 1};
-    InitialState state{};
+     /*
     DealButton deal{&state};
-    BetButton bet{&state};
-    Gui g{{&deal, &bet}};
+    BetButton bet{&state}; */
+    Gui g{std::make_shared<InitialState>()};
     SetTargetFPS(60);
 
 

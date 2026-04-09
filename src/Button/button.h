@@ -4,7 +4,7 @@
 #include <map>
 #include <vector>
 #include "../Game/GameState/gameState.h"
-
+#include <memory>
 
 enum class ButtonType{
     kDeal,
@@ -18,11 +18,9 @@ enum class ButtonType{
 
 class Button{
     public:
-        Button(GameState *game_state);
+        Button(std::shared_ptr<GameState> game_state);
         virtual void OnClick();
-
-        GameState *game_state_;
-        ButtonType type_;
+        std::shared_ptr<GameState> game_state_;
         Rectangle bounds_;
         const char *text_;
         bool enabled_;
@@ -34,19 +32,19 @@ class Button{
 
 class DealButton: public Button{
     public:
-        DealButton(GameState *game_state);
+        DealButton(std::shared_ptr<GameState> game_state);
         void OnClick() override;
 };
 
 class BetButton: public Button{
     public:
-        BetButton(GameState *game_state);
+        BetButton(std::shared_ptr<GameState> game_state);
         void OnClick() override;
 };
 
 class HoldButton: public Button{
     public:
-        HoldButton(int index, GameState *game_state);
+        HoldButton(int index, std::shared_ptr<GameState> game_state);
         int GetIndex();
     private:
         int index_;
@@ -54,20 +52,20 @@ class HoldButton: public Button{
 
 class CashOutButton: public Button{
     public:
-        CashOutButton(GameState *game_state);
+        CashOutButton(std::shared_ptr<GameState> game_state);
 };
 
 class DoubleButton: public Button{
     public:
-        DoubleButton(GameState *game_state);
+        DoubleButton(std::shared_ptr<GameState> game_state);
 };
 
 class SmallButton: public Button{
     public:
-        SmallButton(GameState *game_state);
+        SmallButton(std::shared_ptr<GameState> game_state);
 };
 
 class BigButton: public Button{
     public:
-        BigButton(GameState *game_state);
+        BigButton(std::shared_ptr<GameState> game_state);
 };
