@@ -1,5 +1,5 @@
 #pragma once
-#include "../Button/button.h"
+#include "Button/button.h"
 
 class ButtonManager{
     public:

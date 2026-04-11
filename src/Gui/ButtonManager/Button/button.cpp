@@ -1,9 +1,9 @@
 #include "button.h"
 #define RAYGUI_IMPLEMENTATION
 #include <raygui.h>
-#include "../../Game/GameData/gameData.h"
-#include "../../Game/GameState/gameState.h"
-#include "../gui.h"
+#include "../../../Game/GameData/gameData.h"
+#include "../../../Game/GameState/gameState.h"
+#include "../../gui.h"
 
 Button::Button()
 {
