@@ -66,5 +66,13 @@ void Card::UpdateAndDraw(){
     Draw();
 }
 
+Suit Card::GetSuit(){
+    return suit_;
+}
+
+int Card::GetRank(){
+    return rank_;
+}
+
 Joker::Joker(Vector2 position, const Texture2D &spritesheet, bool is_visible):
     Card(position, 14, Suit::kJoker, spritesheet, is_visible){}
