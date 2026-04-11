@@ -9,6 +9,42 @@ HandValue EvaluateHand(const std::vector<Card> &hand){
     ConstructHistograms(rank_histogram, suit_histogram, hand);
     int jokers = CountJokers(hand);
 
+    bool has_flush = HasFlush(suit_histogram);
+    bool has_straight = HasStraight(rank_histogram, jokers);
+    int max_of_same_rank = MaxSameRank(rank_histogram, jokers);
+
+    if(max_of_same_rank == 5){
+        return HandValue::kFiveOfAKind;
+    }
+
+    if(has_flush && has_straight){
+        return HandValue::kStraightFlush;
+    }
+
+    if(max_of_same_rank == 4){
+        return HandValue::kFourOfAKind;
+    }
+
+    if (HasFullHouse(rank_histogram, max_of_same_rank)){
+        return HandValue::kFullHouse;
+    }
+
+    if (has_flush){
+        return HandValue::kFlush;
+    }
+
+    if (has_straight){
+        return HandValue::kStraight;
+    }
+
+    if (max_of_same_rank == 3){
+        return HandValue::kThreeOfAKind;
+    }
+
+    if (HasTwoPairs(rank_histogram, max_of_same_rank)){
+        return HandValue::kTwoPairs;
+    }
+
     return HandValue::kNone;
 }
 
@@ -85,4 +121,12 @@ int MaxSameRank(const std::map<int, int> &rank_histogram, int jokers){
     }
 
     return *std::max_element(ranks.begin(), ranks.end()) + jokers;
+}
+
+bool HasFullHouse(const std::map<int, int> &rank_histogram, int max_same_rank){
+    return max_same_rank == 3 && rank_histogram.size() == 2;
+}
+
+bool HasTwoPairs(const std::map<int, int> &rank_histogram, int max_same_rank){
+    return max_same_rank == 2 && rank_histogram.size() == 3;
 }
