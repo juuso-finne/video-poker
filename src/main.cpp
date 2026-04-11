@@ -12,7 +12,7 @@ int main()
     float delay = 0.25;
     std::vector<Card> cards{};
 
-    InitWindow(Gui::screenWidth_, Gui::screenHeight_, "Video poker");
+    InitWindow(ScreenConstants::screenWidth_, ScreenConstants::screenHeight_, "Video poker");
     Deck deck = {{-75, 300}, 1};
 
     SetTargetFPS(60);
