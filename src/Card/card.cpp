@@ -2,14 +2,13 @@
 #include <stdexcept>
 #include <raymath.h>
 
-Card::Card(){
-}
-
 Card::Card(Vector2 position, int rank, Suit suit, const Texture2D &spritesheet, bool is_visible)
 {
+    bool rank_out_of_bounds = rank < 1 || rank > 13;
+    bool is_joker = rank == 14 && suit == Suit::kJoker;
 
-    if(rank < 1 || rank > 13){
-        throw std::invalid_argument("Card rank must be between 1 and 13 (incl.)");
+    if(rank_out_of_bounds && !is_joker){
+        throw std::invalid_argument("Card.cpp: Card rank must be between 1 and 13 (incl.) for regular cards. 14 for joker");
     }
 
     position_ = position;
@@ -67,10 +66,5 @@ void Card::UpdateAndDraw(){
     Draw();
 }
 
-Joker::Joker(Vector2 position, const Texture2D &spritesheet, bool is_visible){
-    position_ = position;
-    rank_ = 14;
-    suit_index_ = 0;
-    is_visible_ = is_visible;
-    spritesheet_ = spritesheet;
-}
+Joker::Joker(Vector2 position, const Texture2D &spritesheet, bool is_visible):
+    Card(position, 14, Suit::kJoker, spritesheet, is_visible){}

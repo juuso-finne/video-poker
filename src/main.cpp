@@ -1,33 +1,46 @@
 #include <raylib.h>
-#include"Card/deck.h"
+#include "Card/deck.h"
+#include "Gui/gui.h"
+#include "Game/GameData/gameData.h"
+#include "Game/GameState/gameState.h"
+#include <memory>
+
 
 int main()
 {
-    constexpr int screenWidth = 800;
-    constexpr int screenHeight = 600;
 
     float delay = 0.25;
     std::vector<Card> cards{};
 
-    InitWindow(screenWidth, screenHeight, "Video poker");
+    InitWindow(ScreenConstants::screenWidth_, ScreenConstants::screenHeight_, "Video poker");
     Deck deck = {{-75, 300}, 1};
-    SetTargetFPS(60);
 
+    SetTargetFPS(60);
 
 
     while (!WindowShouldClose())
     {
+
         delay -= GetFrameTime();
-        if(delay < 0 && !deck.isEmpty()){
-            delay = 0.25;
+        if(delay < 0 ){
+            delay = 0.5;
+            if(deck.IsEmpty()){
+                delay = 1;
+                deck.Reset();
+            }
             Card c = deck.DealOne();
             c.FaceUp();
-            c.Move({775, 300}, 5);
+            c.Move({775, 300}, GetFrameTime() * 250);
             cards.push_back(c);
         }
 
+
         BeginDrawing();
         ClearBackground(BLACK);
+        GameData::state_ -> Init();
+        ButtonManager::DrawButtons();
+
+
         for (std::vector<Card>::iterator it = cards.begin(); it != cards.end();)
         {
             if (!(*it).IsMoving()){
@@ -37,7 +50,8 @@ int main()
                 (*it).UpdateAndDraw();
                 ++it;
             }
-    }
+        }
+
         EndDrawing();
     }
 

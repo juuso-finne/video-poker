@@ -7,8 +7,8 @@ Deck::Deck(Vector2 position, int jokers){
     cards_ = std::vector<Card>{};
     spritesheet_ = LoadTexture("assets/graphics/card_spritesheet.png");
     position_ = position;
-    Generate(jokers);
-    Shuffle();
+    jokers_ = jokers;
+    Reset();
 }
 
 Deck::~Deck(){
@@ -21,11 +21,16 @@ void Deck::Shuffle(){
     std::shuffle(cards_.begin(), cards_.end(), g);
 }
 
-bool Deck::isEmpty(){
+bool Deck::IsEmpty(){
     return cards_.empty();
 }
 
-void Deck::Generate(int jokers){
+void Deck::Reset(){
+    Generate();
+    Shuffle();
+}
+
+void Deck::Generate(){
 
     cards_.clear();
 
@@ -37,7 +42,7 @@ void Deck::Generate(int jokers){
         }
     }
 
-    for (int i = 0; i < jokers; i++){
+    for (int i = 0; i < jokers_; i++){
         cards_.push_back(Joker(position_, spritesheet_));
     }
 }

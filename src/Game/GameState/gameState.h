@@ -1,0 +1,83 @@
+#pragma once
+#include <vector>
+#include "../../Gui/gui.h"
+
+
+
+class GameState{
+    public:
+        virtual void Init() = 0;
+
+        virtual void Deal();
+        virtual void Bet();
+        virtual void Hold(int index);
+        virtual void CashOut();
+        virtual void Double();
+        virtual void Small();
+        virtual void Big();
+
+    protected:
+        GameState();
+        void ChangeState(GameState *new_state);
+};
+
+class InitialState: public GameState{
+    public:
+        static InitialState* Instance();
+        void Init() override;
+
+        void Deal() override;
+        void Bet() override;
+
+    protected:
+        InitialState();
+
+    private:
+        static InitialState initial_state_;
+
+};
+
+class DrawState: public GameState{
+    public:
+        static DrawState* Instance();
+        void Init() override;
+
+        void Deal() override;
+        void Hold(int index) override;
+
+    protected:
+       DrawState();
+
+    private:
+        static DrawState draw_state_;
+};
+
+class WinState: public GameState{
+    public:
+        static WinState* Instance();
+        void Init() override;
+
+        void Double() override;
+        void CashOut() override;
+
+    protected:
+       WinState();
+
+    private:
+        static WinState win_state_;
+};
+
+class DoubleState: public GameState{
+    public:
+        static DoubleState* Instance();
+        void Init() override;
+
+        void Small() override;
+        void Big() override;
+
+    protected:
+        DoubleState();
+
+    private:
+        static DoubleState double_state_;
+};
