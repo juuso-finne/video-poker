@@ -1,5 +1,8 @@
 #include "gui.h"
 
+float Gui::screenHeight_ = 600;
+float Gui::screenWidth_ = 800;
+
 DealButton Gui::deal_button_;
 BetButton Gui::bet_button_;
 std::vector<HoldButton> Gui::hold_buttons_ = {

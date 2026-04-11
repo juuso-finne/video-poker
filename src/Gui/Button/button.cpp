@@ -3,6 +3,7 @@
 #include <raygui.h>
 #include "../../Game/GameData/gameData.h"
 #include "../../Game/GameState/gameState.h"
+#include "../gui.h"
 
 Button::Button()
 {
@@ -28,8 +29,8 @@ void Button::Draw(){
 
 DealButton::DealButton(): Button(){
     text_ = "DEAL";
-    float x = GameData::screenWidth_ - padding_ - width_;
-    float y = GameData::screenHeight_ - padding_ - height_;
+    float x = Gui::screenWidth_ - padding_ - width_;
+    float y = Gui::screenHeight_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
 }
 
@@ -39,8 +40,8 @@ void DealButton::OnClick(){
 
 BetButton::BetButton(): Button(){
     text_ = "BET";
-    float x = GameData::screenWidth_ - padding_ - width_;
-    float y = GameData::screenHeight_ - 2 * (padding_ + height_);
+    float x = Gui::screenWidth_ - padding_ - width_;
+    float y = Gui::screenHeight_ - 2 * (padding_ + height_);
     bounds_ = Rectangle{x, y, width_, height_};
 }
 
@@ -51,7 +52,7 @@ void BetButton::OnClick(){
 HoldButton::HoldButton(int index): Button(){
     text_ = "HOLD";
     float x = (index + 1) * padding_ + index * width_;
-    float y = GameData::screenHeight_ - 2 * (padding_ + height_);
+    float y = Gui::screenHeight_ - 2 * (padding_ + height_);
     bounds_ = Rectangle{x, y, width_, height_};
     index_ = index;
 }
@@ -63,7 +64,7 @@ void HoldButton::OnClick(){
 CashOutButton::CashOutButton(): Button(){
     text_ = "CASH OUT";
     float x = padding_;
-    float y = GameData::screenHeight_ - padding_ - height_;
+    float y = Gui::screenHeight_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
 }
 
@@ -74,7 +75,7 @@ void CashOutButton::OnClick(){
 DoubleButton::DoubleButton(): Button(){
     text_ = "DOUBLE";
     float x = width_ + 2 * padding_;
-    float y = GameData::screenHeight_ - padding_ - height_;
+    float y = Gui::screenHeight_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
 }
 
@@ -85,7 +86,7 @@ void DoubleButton::OnClick(){
 SmallButton::SmallButton(): Button(){
     text_ = "SMALL";
     float x = 2 * width_ + 3 * padding_;
-    float y = GameData::screenHeight_ - padding_ - height_;
+    float y = Gui::screenHeight_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
 }
 
@@ -96,7 +97,7 @@ void SmallButton::OnClick(){
 BigButton::BigButton(): Button(){
     text_ = "BIG";
     float x = 3 * width_ + 4 * padding_;
-    float y = GameData::screenHeight_ - padding_ - height_;
+    float y = Gui::screenHeight_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
 }
 

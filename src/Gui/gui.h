@@ -14,4 +14,7 @@ class Gui{
 
         static void DisableButtons();
         static void DrawButtons();
+
+        static float screenWidth_;
+        static float screenHeight_;
 };

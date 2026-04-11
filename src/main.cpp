@@ -1,5 +1,6 @@
 #include <raylib.h>
 #include "Card/deck.h"
+#include "Gui/gui.h"
 #include "Game/GameData/gameData.h"
 #include "Game/GameState/gameState.h"
 #include <memory>
@@ -11,7 +12,7 @@ int main()
     //float delay = 0.25;
     std::vector<Card> cards{};
 
-    InitWindow(GameData::screenWidth_, GameData::screenHeight_, "Video poker");
+    InitWindow(Gui::screenWidth_, Gui::screenHeight_, "Video poker");
     //Deck deck = {{-75, 300}, 1};
      /*
     DealButton deal{&state};
@@ -35,7 +36,7 @@ int main()
         */
         BeginDrawing();
         ClearBackground(BLACK);
-        GameData::state_->Init();
+        GameData::state_ -> Init();
         Gui::DrawButtons();
 
         /*
