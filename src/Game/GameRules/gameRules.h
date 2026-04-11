@@ -16,9 +16,13 @@ enum class HandValue{
 };
 
 HandValue EvaluateHand(const std::vector<Card> &hand);
+
 void ConstructHistograms(
     std::map<int, int> &rank_histogram,
     std::map<Suit, int> &suit_histogram,
     const std::vector<Card> &hand
 );
+
 int CountJokers(const std::vector<Card> &hand);
+
+bool HasStraight(const std::map<int, int> &rank_histogram, int jokers);
