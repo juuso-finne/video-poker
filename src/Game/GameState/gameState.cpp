@@ -10,3 +10,8 @@ void GameState::Small(){}
 void GameState::Big(){}
 
 GameState::GameState(){}
+
+void GameState::ChangeState(GameState *new_state){
+    Gui::DisableButtons();
+    GameData::state_ = new_state;
+}

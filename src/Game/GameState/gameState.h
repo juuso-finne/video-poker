@@ -18,6 +18,7 @@ class GameState{
 
     protected:
         GameState();
+        void ChangeState(GameState *new_state);
 };
 
 class InitialState: public GameState{

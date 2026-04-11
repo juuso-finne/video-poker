@@ -7,7 +7,6 @@ DrawState::DrawState(){}
 DrawState *DrawState::Instance(){ return &draw_state_; }
 
 void DrawState::Init(){
-    Gui::DisableButtons();
     for (HoldButton &b: Gui::hold_buttons_){
         b.enabled_ = true;
     }
@@ -16,7 +15,7 @@ void DrawState::Init(){
 
 void DrawState::Deal(){
     std::cout << "DEAL (draw state)" << std::endl;
-    GameData::state_ = WinState::Instance();
+    ChangeState(WinState::Instance());
 }
 
 void DrawState::Hold(int index){

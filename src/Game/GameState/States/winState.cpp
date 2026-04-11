@@ -8,17 +8,16 @@ WinState WinState::win_state_;
 WinState *WinState::Instance(){ return &win_state_;}
 
 void WinState::Init(){
-    Gui::DisableButtons();
     Gui::cash_out_button_.enabled_ = true;
     Gui::double_button_.enabled_ = true;
 }
 
 void WinState::Double(){
     std::cout << "Double" << std::endl;
-    GameData::state_ = DoubleState::Instance();
+    ChangeState(DoubleState::Instance());
 }
 
 void WinState::CashOut(){
     std::cout << "Cash out" << std::endl;
-    GameData::state_ = InitialState::Instance();
+    ChangeState(InitialState::Instance());
 }
