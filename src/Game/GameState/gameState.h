@@ -1,35 +1,82 @@
 #pragma once
+#include <vector>
+#include "../../Gui/gui.h"
+
+
 
 class GameState{
     public:
+        virtual void Init() = 0;
+
+        virtual void Deal();
+        virtual void Bet();
+        virtual void Hold(int index);
+        virtual void CashOut();
+        virtual void Double();
+        virtual void Small();
+        virtual void Big();
+
+    protected:
         GameState();
-        virtual void DealButtonClick();
-        virtual bool DealButtonEnabled();
-
-        virtual bool BetButtonEnabled();
-        virtual void BetButtonClick();
-
-        virtual bool HoldButtonEnabled();
-        virtual void HoldButtonClick(int index);
-
-        virtual bool CashOutButtonEnabled();
-        virtual void CashOutButtonClick();
-
-        virtual bool DoubleButtonEnabled();
-        virtual void DoubleButtonClick();
-
-        virtual bool SmallButtonEnabled();
-        virtual void SmallButtonClick();
-
-        virtual bool BigButtonEnabled();
-        virtual void BigButtonClick();
 };
 
 class InitialState: public GameState{
     public:
-        bool DealButtonEnabled() override;
-        void DealButtonClick() override;
+        static InitialState* Instance();
+        void Init() override;
 
-        bool BetButtonEnabled() override;
-        void BetButtonClick() override;
+        void Deal() override;
+        void Bet() override;
+
+    protected:
+        InitialState();
+
+    private:
+        static InitialState initial_state_;
+
+};
+
+class DrawState: public GameState{
+    public:
+        static DrawState* Instance();
+        void Init() override;
+
+        void Deal() override;
+        void Hold(int index) override;
+
+    protected:
+       DrawState();
+
+    private:
+        static DrawState draw_state_;
+};
+
+class WinState: public GameState{
+    public:
+        static WinState* Instance();
+        void Init() override;
+
+        void Double() override;
+        void CashOut() override;
+
+    protected:
+       WinState();
+
+    private:
+        static WinState win_state_;
+};
+
+class DoubleState: public GameState{
+    public:
+        static DoubleState* Instance();
+        void Init() override;
+
+        void Small() override;
+        void Big() override;
+
+    protected:
+        DoubleState();
+
+    private:
+        static DoubleState double_state_;
 };

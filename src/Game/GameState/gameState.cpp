@@ -1,24 +1,12 @@
 #include "gameState.h"
+#include "../GameData/gameData.h"
+
+void GameState::Deal(){}
+void GameState::Bet(){}
+void GameState::Hold(int index){}
+void GameState::CashOut(){}
+void GameState::Double(){}
+void GameState::Small(){}
+void GameState::Big(){}
 
 GameState::GameState(){}
-
-void GameState::DealButtonClick() {}
-bool GameState::DealButtonEnabled(){ return false; }
-
-bool GameState::BetButtonEnabled(){ return false; }
-void GameState::BetButtonClick(){}
-
-bool GameState::HoldButtonEnabled(){ return false; }
-void GameState::HoldButtonClick(int index) {}
-
-bool GameState::CashOutButtonEnabled(){ return false; }
-void GameState::CashOutButtonClick(){}
-
-bool GameState::DoubleButtonEnabled(){ return false; }
-void GameState::DoubleButtonClick(){}
-
-bool GameState::SmallButtonEnabled(){ return false; }
-void GameState::SmallButtonClick(){}
-
-bool GameState::BigButtonEnabled(){ return false; }
-void GameState::BigButtonClick(){}
