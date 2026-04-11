@@ -76,3 +76,13 @@ bool HasStraight(const std::map<int, int> &rank_histogram, int jokers){
 bool HasFlush(const std::map<Suit, int> &suit_histogram){
     return suit_histogram.size() == 1;
 }
+
+int MaxSameRank(const std::map<int, int> &rank_histogram, int jokers){
+    std::vector<int> ranks = {};
+
+    for(std::map<int, int>::const_iterator it = rank_histogram.begin(); it != rank_histogram.end(); it++){
+        ranks.push_back(it -> second);
+    }
+
+    return *std::max_element(ranks.begin(), ranks.end()) + jokers;
+}

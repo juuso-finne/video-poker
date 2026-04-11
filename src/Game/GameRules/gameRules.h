@@ -26,3 +26,4 @@ void ConstructHistograms(
 int CountJokers(const std::vector<Card> &hand);
 bool HasStraight(const std::map<int, int> &rank_histogram, int jokers);
 bool HasFlush(const std::map<Suit, int> &suit_histogram);
+int MaxSameRank(const std::map<int, int> &rank_histogram, int jokers);
