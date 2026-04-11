@@ -3,6 +3,7 @@
 #include "Gui/gui.h"
 #include "Game/GameData/gameData.h"
 #include "Game/GameState/gameState.h"
+#include "Game/GameRules/gameRules.h"
 #include <memory>
 
 
@@ -14,6 +15,9 @@ int main()
 
     InitWindow(ScreenConstants::screenWidth_, ScreenConstants::screenHeight_, "Video poker");
     Deck deck = {{-75, 300}, 1};
+    std::vector<Card> hand = deck.DealN(5);
+    EvaluateHand(hand);
+
 
     SetTargetFPS(60);
 
