@@ -8,8 +8,8 @@ InitialState::InitialState(){}
 InitialState *InitialState::Instance() { return &initial_state_; }
 
 void InitialState::Init(){
-    Gui::deal_button_.enabled_ = true;
-    Gui::bet_button_.enabled_ = true;
+    ButtonManager::deal_button_.enabled_ = true;
+    ButtonManager::bet_button_.enabled_ = true;
 }
 
 void InitialState::Deal(){

@@ -12,6 +12,6 @@ void GameState::Big(){}
 GameState::GameState(){}
 
 void GameState::ChangeState(GameState *new_state){
-    Gui::DisableButtons();
+    ButtonManager::DisableButtons();
     GameData::state_ = new_state;
 }

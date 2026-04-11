@@ -8,8 +8,8 @@ WinState WinState::win_state_;
 WinState *WinState::Instance(){ return &win_state_;}
 
 void WinState::Init(){
-    Gui::cash_out_button_.enabled_ = true;
-    Gui::double_button_.enabled_ = true;
+    ButtonManager::cash_out_button_.enabled_ = true;
+    ButtonManager::double_button_.enabled_ = true;
 }
 
 void WinState::Double(){

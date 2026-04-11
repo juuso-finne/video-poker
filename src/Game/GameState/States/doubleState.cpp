@@ -7,8 +7,8 @@ DoubleState::DoubleState(){}
 DoubleState *DoubleState::Instance(){ return &double_state_; }
 
 void DoubleState::Init(){
-    Gui::small_button_.enabled_ = true;
-    Gui::big_button_.enabled_ = true;
+    ButtonManager::small_button_.enabled_ = true;
+    ButtonManager::big_button_.enabled_ = true;
 }
 
 void DoubleState::Big(){

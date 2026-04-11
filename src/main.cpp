@@ -30,7 +30,7 @@ int main()
             }
             Card c = deck.DealOne();
             c.FaceUp();
-            c.Move({775, 300}, 15);
+            c.Move({775, 300}, GetFrameTime() * 250);
             cards.push_back(c);
         }
 
@@ -38,7 +38,7 @@ int main()
         BeginDrawing();
         ClearBackground(BLACK);
         GameData::state_ -> Init();
-        Gui::DrawButtons();
+        ButtonManager::DrawButtons();
 
 
         for (std::vector<Card>::iterator it = cards.begin(); it != cards.end();)

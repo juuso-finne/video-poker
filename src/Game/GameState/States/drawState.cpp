@@ -7,10 +7,10 @@ DrawState::DrawState(){}
 DrawState *DrawState::Instance(){ return &draw_state_; }
 
 void DrawState::Init(){
-    for (HoldButton &b: Gui::hold_buttons_){
+    for (HoldButton &b: ButtonManager::hold_buttons_){
         b.enabled_ = true;
     }
-    Gui::deal_button_.enabled_ = true;
+    ButtonManager::deal_button_.enabled_ = true;
 }
 
 void DrawState::Deal(){
