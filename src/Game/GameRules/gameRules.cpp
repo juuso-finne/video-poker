@@ -9,7 +9,6 @@ HandValue EvaluateHand(const std::vector<Card> &hand){
     ConstructHistograms(rank_histogram, suit_histogram, hand);
     int jokers = CountJokers(hand);
 
-
     return HandValue::kNone;
 }
 
@@ -72,4 +71,8 @@ bool HasStraight(const std::map<int, int> &rank_histogram, int jokers){
     }
 
     return true;
+}
+
+bool HasFlush(const std::map<Suit, int> &suit_histogram){
+    return suit_histogram.size() == 1;
 }
