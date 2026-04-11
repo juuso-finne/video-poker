@@ -1,39 +1,44 @@
 #include "gui.h"
-#define RAYGUI_IMPLEMENTATION
-#include <raygui.h>
 
-Gui::Gui(std::shared_ptr<GameState> game_state){
-    game_state_ = game_state;
-}
+DealButton Gui::deal_button_;
+BetButton Gui::bet_button_;
+std::vector<HoldButton> Gui::hold_buttons_ = {
+    HoldButton(0),
+    HoldButton(1),
+    HoldButton(2),
+    HoldButton(3),
+    HoldButton(4)
+};
+CashOutButton Gui::cash_out_button_;
+DoubleButton Gui::double_button_;
+SmallButton Gui::small_button_;
+BigButton Gui::big_button_;
 
-void Gui::Update(){
-    std::vector<std::shared_ptr<Button>> buttons = GenerateButtons();
-    for (size_t i = 0; i < buttons.size(); i++){
-        if (buttons[i] -> enabled_){
-            GuiEnable();
-        } else{
-            GuiDisable();
-        }
+void Gui::DisableButtons(){
+    deal_button_.enabled_ = false;
 
-        if(GuiButton(buttons[i] -> bounds_, buttons[i] -> text_)){
-            buttons[i] -> OnClick();
-        }
-    }
-}
-
-std::vector<std::shared_ptr<Button>> Gui::GenerateButtons(){
-    std::vector<std::shared_ptr<Button>> output = {};
-
-    output.push_back(std::make_shared<DealButton>(game_state_));
-    output.push_back(std::make_shared<BetButton>(game_state_));
-    output.push_back(std::make_shared<CashOutButton>(game_state_));
-    output.push_back(std::make_shared<DoubleButton>(game_state_));
-    output.push_back(std::make_shared<SmallButton>(game_state_));
-    output.push_back(std::make_shared<BigButton>(game_state_));
-
-     for(int i = 0; i < 5; i++){
-        output.push_back(std::make_shared<HoldButton>(i, game_state_));
+    for (HoldButton &b : hold_buttons_){
+        b.enabled_ = false;
     }
 
-    return output;
+    bet_button_.enabled_ = false;
+    cash_out_button_.enabled_ = false;
+    double_button_.enabled_ = false;
+    small_button_.enabled_ = false;
+    big_button_.enabled_ = false;
+}
+
+void Gui::DrawButtons(){
+
+    deal_button_.Draw();
+
+    for (HoldButton &b : hold_buttons_){
+        b.Draw();
+    }
+
+    bet_button_.Draw();
+    cash_out_button_.Draw();
+    double_button_.Draw();
+    small_button_.Draw();
+    big_button_.Draw();
 }

@@ -1,23 +1,22 @@
 #include <raylib.h>
 #include "Card/deck.h"
-#include "Gui/gui.h"
+#include "Game/GameData/gameData.h"
+#include "Game/GameState/gameState.h"
 #include <memory>
 
 
 int main()
 {
-    constexpr int screenWidth = 800;
-    constexpr int screenHeight = 600;
 
     //float delay = 0.25;
     std::vector<Card> cards{};
 
-    InitWindow(screenWidth, screenHeight, "Video poker");
+    InitWindow(GameData::screenWidth_, GameData::screenHeight_, "Video poker");
     //Deck deck = {{-75, 300}, 1};
      /*
     DealButton deal{&state};
     BetButton bet{&state}; */
-    Gui g{std::make_shared<InitialState>()};
+
     SetTargetFPS(60);
 
 
@@ -36,8 +35,8 @@ int main()
         */
         BeginDrawing();
         ClearBackground(BLACK);
-
-        g.Update();
+        GameData::state_->Init();
+        Gui::DrawButtons();
 
         /*
         for (std::vector<Card>::iterator it = cards.begin(); it != cards.end();)
