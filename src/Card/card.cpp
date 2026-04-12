@@ -56,7 +56,7 @@ bool Card::IsMoving(){
 
 void Card::Update(){
     if(is_moving_){
-        position_ = Vector2MoveTowards(position_, destination_, speed_);
+        position_ = Vector2MoveTowards(position_, destination_, GetFrameTime() * speed_);
         is_moving_ = Vector2Equals(position_, destination_) == 0;
     }
 }
@@ -64,6 +64,14 @@ void Card::Update(){
 void Card::UpdateAndDraw(){
     Update();
     Draw();
+}
+
+Suit Card::GetSuit(){
+    return suit_;
+}
+
+int Card::GetRank(){
+    return rank_;
 }
 
 Joker::Joker(Vector2 position, const Texture2D &spritesheet, bool is_visible):

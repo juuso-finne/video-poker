@@ -19,6 +19,8 @@ class Card{
         bool IsMoving();
         void Update();
         void UpdateAndDraw();
+        Suit GetSuit();
+        int GetRank();
     protected:
         bool is_visible_;
         bool is_moving_;
