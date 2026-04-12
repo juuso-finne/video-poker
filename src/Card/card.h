@@ -22,6 +22,7 @@ class Card{
         bool is_face_up_;
         Vector2 GetPosition();
         int GetSuitIndex();
+
     protected:
         bool is_moving_;
         float speed_;
@@ -30,7 +31,6 @@ class Card{
         Suit suit_;
         Vector2 position_;
         Vector2 destination_;
-        Texture2D spritesheet_;
 };
 
 class Joker: public Card{

@@ -14,12 +14,31 @@ void DrawState::Init(){
 }
 
 void DrawState::Deal(){
-    std::cout << "DEAL (draw state)" << std::endl;
+    std::vector<Card> new_hand;
+
+    for (int i = 0; i < 5; i++){
+        Card old_card = GameData::player_hand_[i];
+        if(GameData::held_cards_[i]){
+            new_hand.push_back(old_card);
+        } else{
+            Card new_card = GameData::deck_.DealOne();
+            new_card.FaceUp();
+            new_card.Move(old_card.GetPosition(), 500);
+            new_hand.push_back(new_card);
+        }
+    }
     ChangeState(WinState::Instance());
 }
 
 void DrawState::Hold(int index){
-    std::cout << "HOLD " << index << std::endl;
+    GameData::held_cards_[index] = !GameData::held_cards_[index];
+    std::cout << "Cards held: ";
+    for (int i = 0; i < 5; i++){
+        if(GameData::held_cards_[i]){
+            std::cout << i << ", ";
+        }
+    }
+    std::cout << std::endl;
 }
 
 

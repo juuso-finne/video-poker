@@ -15,12 +15,7 @@ int main()
 
     InitWindow(ScreenConstants::screen_width_, ScreenConstants::screen_height_, "Video poker");
     Texture2D card_sprite_sheet = LoadTexture("assets/graphics/card_spritesheet.png");
-    std::vector<Vector2> card_slots = ScreenConstants::GetCardSlots();
-    GameData::player_hand_ = GameData::deck_.DealN(5);
-    for(int i; i < 5; i++){
-        GameData::player_hand_[i].FaceUp();
-        GameData::player_hand_[i].Move(card_slots[i], 500);
-    }
+
 
 
 

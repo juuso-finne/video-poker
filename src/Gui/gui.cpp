@@ -28,8 +28,8 @@ void Gui::DrawDeck(const Texture2D &spritesheet){
     float margin = 2;
     Vector2 position = GameData::deck_.GetPosition();
     for(int i = 10; i >= 0; i--){
-        Vector2 offset = {i * margin, -i * margin};
-        Card c = {Vector2Subtract(position, offset), 1, Suit::kClubs};
+        Vector2 offset = {i * margin, i * margin};
+        Card c = {Vector2Add(position, offset), 1, Suit::kClubs};
         UpdateAndDrawCard(spritesheet, c);
     }
 }
