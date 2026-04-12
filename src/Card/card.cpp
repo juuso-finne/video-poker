@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <raymath.h>
 
-Card::Card(Vector2 position, int rank, Suit suit, const Texture2D &spritesheet, bool is_visible)
+Card::Card(Vector2 position, int rank, Suit suit, bool is_visible)
 {
     bool rank_out_of_bounds = rank < 1 || rank > 13;
     bool is_joker = rank == 14 && suit == Suit::kJoker;
@@ -19,30 +19,15 @@ Card::Card(Vector2 position, int rank, Suit suit, const Texture2D &spritesheet, 
     rank_ = rank;
     suit_ = suit;
     suit_index_ = static_cast<int>(suit);
-    is_visible_ = is_visible;
-    spritesheet_ = spritesheet;
-}
-
-void Card::Draw(){
-
-    float card_width = ScreenConstants::card_width_;
-    float card_height = ScreenConstants::card_height_;
-
-    float x_offset = (is_visible_ ? (float)(rank_ - 1) : 13.0) * card_width;
-    float y_offset = (is_visible_ ? (float)suit_index_ : 3.0) * card_height;
-
-    Rectangle source = {x_offset, y_offset, card_width, card_height};
-
-    DrawTextureRec(spritesheet_, source, position_, WHITE);
-
+    is_face_up_ = is_visible;
 }
 
 void Card::FaceUp(){
-    is_visible_ = true;
+    is_face_up_ = true;
 }
 
 void Card::FaceDown(){
-    is_visible_ = false;
+    is_face_up_ = false;
 }
 
 void Card::Move(const Vector2 &destination, float speed){
@@ -62,11 +47,6 @@ void Card::Update(){
     }
 }
 
-void Card::UpdateAndDraw(){
-    Update();
-    Draw();
-}
-
 Suit Card::GetSuit(){
     return suit_;
 }
@@ -75,5 +55,13 @@ int Card::GetRank(){
     return rank_;
 }
 
-Joker::Joker(Vector2 position, const Texture2D &spritesheet, bool is_visible):
-    Card(position, 14, Suit::kJoker, spritesheet, is_visible){}
+Vector2 Card::GetPosition(){
+    return position_;
+}
+
+int Card::GetSuitIndex(){
+    return suit_index_;
+}
+
+Joker::Joker(Vector2 position, bool is_visible):
+    Card(position, 14, Suit::kJoker, is_visible){}

@@ -6,7 +6,6 @@
 class Deck{
     public:
         Deck(Vector2 position, int jokers = 0);
-        ~Deck();
         void Shuffle();
         bool IsEmpty();
         void Reset();
@@ -14,7 +13,6 @@ class Deck{
         std::vector<Card> DealN(int n);
     private:
         std::vector<Card> cards_;
-        Texture2D spritesheet_;
         Vector2 position_;
         void Generate();
         int jokers_;

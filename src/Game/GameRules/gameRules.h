@@ -15,7 +15,7 @@ enum class HandValue{
     kNone
 };
 
-std::map<HandValue, int> payout_table;
+extern std::map<HandValue, int> payout_table;
 
 HandValue EvaluateHand(const std::vector<Card> &hand);
 
