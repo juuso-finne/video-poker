@@ -81,4 +81,8 @@ class DoubleState: public GameState{
 
     private:
         static DoubleState double_state_;
+        void Resolve(bool success);
+        void ResolveSeven();
+        void Win();
+        void Lose();
 };
