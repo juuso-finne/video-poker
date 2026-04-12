@@ -15,6 +15,8 @@ enum class HandValue{
     kNone
 };
 
+std::map<HandValue, int> payout_table;
+
 HandValue EvaluateHand(const std::vector<Card> &hand);
 
 void ConstructHistograms(
