@@ -1,5 +1,5 @@
 #pragma once
-#include "../../Card/card.h"
+#include "../../Card/deck.h"
 #include<vector>
 
 class GameState;
@@ -14,6 +14,7 @@ class GameData{
         static int total_winnings_;
         static int total_bets_;
 
+        static Deck deck_;
         static std::vector<Card> player_hand_;
         static bool held_cards_[5];
 };

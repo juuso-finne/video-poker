@@ -13,7 +13,7 @@ int main()
 /*     float delay = 0.25;
     std::vector<Card> cards{}; */
 
-    InitWindow(ScreenConstants::screenWidth_, ScreenConstants::screenHeight_, "Video poker");
+    InitWindow(ScreenConstants::screen_width_, ScreenConstants::screen_height_, "Video poker");
     Texture2D t = LoadTexture("assets/graphics/card_spritesheet.png");
     Deck deck = {{-75, 300}, 1};
     std::vector<Card> hand = deck.DealN(5);

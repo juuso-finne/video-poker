@@ -6,4 +6,5 @@
 
 class Gui{
     public:
+        static void Update();
 };

@@ -1,4 +1,5 @@
 #include "card.h"
+#include "../Gui/gui.h"
 #include <stdexcept>
 #include <raymath.h>
 
@@ -24,13 +25,13 @@ Card::Card(Vector2 position, int rank, Suit suit, const Texture2D &spritesheet, 
 
 void Card::Draw(){
 
-    constexpr int kCardWidth = 75;
-    constexpr int kCardHeight = 112;
+    float card_width = ScreenConstants::card_width_;
+    float card_height = ScreenConstants::card_height_;
 
-    float x_offset = (is_visible_ ? (float)(rank_ - 1) : 13.0) * kCardWidth;
-    float y_offset = (is_visible_ ? (float)suit_index_ : 3.0) * kCardHeight;
+    float x_offset = (is_visible_ ? (float)(rank_ - 1) : 13.0) * card_width;
+    float y_offset = (is_visible_ ? (float)suit_index_ : 3.0) * card_height;
 
-    Rectangle source = {x_offset, y_offset, kCardWidth, kCardHeight};
+    Rectangle source = {x_offset, y_offset, card_width, card_height};
 
     DrawTextureRec(spritesheet_, source, position_, WHITE);
 
