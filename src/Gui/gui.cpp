@@ -1,11 +1,13 @@
 #include "gui.h"
 #include "../Game/GameData/gameData.h"
+#include <raymath.h>
 
 void Gui::Update(const Texture2D &spritesheet){
     ButtonManager::DrawButtons();
     for (Card &card: GameData::player_hand_){
         UpdateAndDrawCard(spritesheet, card);
     }
+    DrawDeck(spritesheet);
 }
 
 void Gui::UpdateAndDrawCard(const Texture2D &spritesheet, Card &card){
@@ -20,4 +22,14 @@ void Gui::UpdateAndDrawCard(const Texture2D &spritesheet, Card &card){
     Rectangle source = {x_offset, y_offset, card_width, card_height};
 
     DrawTextureRec(spritesheet, source, card.GetPosition(), WHITE);
+}
+
+void Gui::DrawDeck(const Texture2D &spritesheet){
+    float margin = 2;
+    Vector2 position = GameData::deck_.GetPosition();
+    for(int i = 10; i >= 0; i--){
+        Vector2 offset = {i * margin, -i * margin};
+        Card c = {Vector2Subtract(position, offset), 1, Suit::kClubs};
+        UpdateAndDrawCard(spritesheet, c);
+    }
 }

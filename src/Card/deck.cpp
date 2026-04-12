@@ -64,3 +64,7 @@ std::vector<Card> Deck::DealN(int n){
     }
     return output;
 }
+
+Vector2 Deck::GetPosition(){
+    return position_;
+}

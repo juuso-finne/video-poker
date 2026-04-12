@@ -10,4 +10,5 @@ class Gui{
         static void Update(const Texture2D &spritesheet);
     private:
         static void UpdateAndDrawCard(const Texture2D &spritesheet, Card &card);
+        static void DrawDeck(const Texture2D &spritesheet);
 };

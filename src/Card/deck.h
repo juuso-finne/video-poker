@@ -11,6 +11,7 @@ class Deck{
         void Reset();
         Card DealOne();
         std::vector<Card> DealN(int n);
+        Vector2 GetPosition();
     private:
         std::vector<Card> cards_;
         Vector2 position_;
