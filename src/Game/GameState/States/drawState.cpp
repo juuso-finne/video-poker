@@ -27,6 +27,7 @@ void DrawState::Deal(){
             new_hand.push_back(new_card);
         }
     }
+    GameData::player_hand_ = new_hand;
     ChangeState(WinState::Instance());
 }
 
