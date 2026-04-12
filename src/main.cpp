@@ -13,14 +13,9 @@ int main()
 /*     float delay = 0.25;
     std::vector<Card> cards{}; */
 
-    InitWindow(ScreenConstants::screenWidth_, ScreenConstants::screenHeight_, "Video poker");
-    Texture2D t = LoadTexture("assets/graphics/card_spritesheet.png");
-    Deck deck = {{-75, 300}, 1};
-    std::vector<Card> hand = deck.DealN(5);
-    for(int i; i < 5; i++){
-        hand[i].FaceUp();
-        hand[i].Move({(float)(50 + i * 50), 100}, 500);
-    }
+    InitWindow(ScreenConstants::screen_width_, ScreenConstants::screen_height_, "Video poker");
+    Texture2D card_sprite_sheet = LoadTexture("assets/graphics/card_spritesheet.png");
+
 
 
 
@@ -48,7 +43,7 @@ int main()
         BeginDrawing();
         ClearBackground(BLACK);
         GameData::state_ -> Init();
-        ButtonManager::DrawButtons();
+        Gui::Update(card_sprite_sheet);
 
 
 /*         for (std::vector<Card>::iterator it = cards.begin(); it != cards.end();)
@@ -63,12 +58,10 @@ int main()
         }
 
  */
-        for (std::vector<Card>::iterator it = hand.begin(); it != hand.end();){
-            (*it).UpdateAndDraw();
-            ++it;
-        }
         EndDrawing();
     }
+
+    UnloadTexture(card_sprite_sheet);
 
     CloseWindow();
 }

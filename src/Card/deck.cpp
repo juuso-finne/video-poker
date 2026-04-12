@@ -5,15 +5,11 @@
 
 Deck::Deck(Vector2 position, int jokers){
     cards_ = std::vector<Card>{};
-    spritesheet_ = LoadTexture("assets/graphics/card_spritesheet.png");
     position_ = position;
     jokers_ = jokers;
     Reset();
 }
 
-Deck::~Deck(){
-    UnloadTexture(spritesheet_);
-}
 
 void Deck::Shuffle(){
     std::random_device rd;
@@ -38,12 +34,12 @@ void Deck::Generate(){
 
     for (Suit suit : suits){
         for(int rank = 1; rank < 14; rank++){
-            cards_.push_back(Card(position_, rank, suit, spritesheet_));
+            cards_.push_back(Card(position_, rank, suit));
         }
     }
 
     for (int i = 0; i < jokers_; i++){
-        cards_.push_back(Joker(position_, spritesheet_));
+        cards_.push_back(Joker(position_));
     }
 }
 
@@ -67,4 +63,8 @@ std::vector<Card> Deck::DealN(int n){
         }
     }
     return output;
+}
+
+Vector2 Deck::GetPosition(){
+    return position_;
 }

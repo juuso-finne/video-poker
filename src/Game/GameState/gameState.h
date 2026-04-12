@@ -19,6 +19,7 @@ class GameState{
     protected:
         GameState();
         void ChangeState(GameState *new_state);
+        void Reset();
 };
 
 class InitialState: public GameState{
@@ -80,4 +81,8 @@ class DoubleState: public GameState{
 
     private:
         static DoubleState double_state_;
+        void Resolve(bool success);
+        void ResolveSeven();
+        void Win();
+        void Lose();
 };

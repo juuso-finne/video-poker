@@ -13,12 +13,23 @@ void InitialState::Init(){
 }
 
 void InitialState::Deal(){
-    std::cout << "DEAL (initial state)" << std::endl;
+    Reset();
+    GameData::total_bets_ += GameData::bet_;
+    std::vector<Vector2> card_slots = ScreenConstants::GetCardSlots();
+    GameData::player_hand_ = GameData::deck_.DealN(5);
+    for(int i = 0; i < 5; i++){
+        GameData::player_hand_[i].FaceUp();
+        GameData::player_hand_[i].Move(card_slots[i], 500);
+    }
     ChangeState(DrawState::Instance());
 }
 
 void InitialState::Bet(){
-    std::cout << "Bet Increase" << std::endl;
+    GameData::bet_ += 20;
+    if(GameData::bet_ > 100){
+        GameData::bet_ = 20;
+    }
+    std::cout << "Current bet: " << GameData::bet_ << std::endl;
 }
 
 
