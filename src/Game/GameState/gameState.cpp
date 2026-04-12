@@ -15,3 +15,9 @@ void GameState::ChangeState(GameState *new_state){
     ButtonManager::DisableButtons();
     GameData::state_ = new_state;
 }
+
+void GameState::Reset(){
+    GameData::deck_.Reset();
+    GameData::current_winnings_ = 0;
+    GameData::player_hand_.clear();
+}
