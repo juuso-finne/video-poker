@@ -1,6 +1,7 @@
 #include "../gameState.h"
 #include <iostream>
 #include "../../GameData/gameData.h"
+#include "../../GameRules/gameRules.h"
 
 DrawState DrawState::draw_state_;
 DrawState::DrawState(){}
@@ -20,6 +21,7 @@ void DrawState::Deal(){
         Card old_card = GameData::player_hand_[i];
         if(GameData::held_cards_[i]){
             new_hand.push_back(old_card);
+            GameData::held_cards_[i] = false;
         } else{
             Card new_card = GameData::deck_.DealOne();
             new_card.FaceUp();
@@ -28,7 +30,19 @@ void DrawState::Deal(){
         }
     }
     GameData::player_hand_ = new_hand;
-    ChangeState(WinState::Instance());
+
+    HandValue value = EvaluateHand(GameData::player_hand_);
+    int coefficient = payout_table[value];
+
+    if(coefficient == 0){
+        std::cout << "No win!" << std::endl;
+        ChangeState(InitialState::Instance());
+    } else{
+        GameData::current_winnings_ = coefficient * GameData::bet_;
+        std::cout << "You won " << GameData::current_winnings_ << "! Do you want to double?" << std::endl;
+        GameData::deck_.Reset();
+        ChangeState(WinState::Instance());
+    }
 }
 
 void DrawState::Hold(int index){
