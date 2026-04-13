@@ -2,6 +2,7 @@
 #include "../Game/GameData/gameData.h"
 #include <raymath.h>
 #include <iostream>
+#include <raygui.h>
 
 std::queue<std::shared_ptr<Animation>> Gui::animations_;
 bool Gui::animation_playing_ = false;
@@ -10,6 +11,8 @@ void Gui::Update(const Texture2D &spritesheet){
 
     PlayAnimations();
     DrawDeck(spritesheet);
+
+    PrintPayouts(30);
 
     for(Card &card: Animation::animation_cards_){
         UpdateAndDrawCard(spritesheet, card);
