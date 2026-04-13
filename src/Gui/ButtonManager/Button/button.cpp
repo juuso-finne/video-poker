@@ -87,7 +87,7 @@ void CashOutButton::OnClick(){
 
 DoubleButton::DoubleButton(): Button(){
     text_ = "DOUBLE";
-    float x = width_ + 2 * padding_;
+    float x = 3 * width_ + 4 * padding_;
     float y = ScreenConstants::screen_height_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
     color_enabled_ = 0xe37b19ff;
@@ -100,7 +100,7 @@ void DoubleButton::OnClick(){
 
 SmallButton::SmallButton(): Button(){
     text_ = "SMALL";
-    float x = 2 * width_ + 3 * padding_;
+    float x = width_ + 2 * padding_;
     float y = ScreenConstants::screen_height_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
     color_enabled_ = 0xe37b19ff;
@@ -113,7 +113,7 @@ void SmallButton::OnClick(){
 
 BigButton::BigButton(): Button(){
     text_ = "BIG";
-    float x = 3 * width_ + 4 * padding_;
+    float x = 2 * width_ + 3 * padding_;
     float y = ScreenConstants::screen_height_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
     color_enabled_ = 0xe37b19ff;
