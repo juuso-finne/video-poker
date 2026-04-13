@@ -14,13 +14,10 @@ void InitialState::Init(){
 
 void InitialState::Deal(){
     Reset();
+    Gui::animations_.push(std::make_shared<ShuffleAnimation>());
+    Gui::animations_.push(std::make_shared<DealAnimation>());
+    Gui::animations_.push(std::make_shared<RevealAnimation>());
     GameData::total_bets_ += GameData::bet_;
-    std::vector<Vector2> card_slots = ScreenConstants::GetCardSlots();
-    GameData::player_hand_ = GameData::deck_.DealN(5);
-    for(int i = 0; i < 5; i++){
-        GameData::player_hand_[i].FaceUp();
-        GameData::player_hand_[i].Move(card_slots[i], 500);
-    }
     ChangeState(DrawState::Instance());
 }
 

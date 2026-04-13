@@ -20,7 +20,7 @@ void GameState::ChangeState(GameState *new_state){
 void GameState::Reset(){
     GameData::deck_.Reset();
     GameData::current_winnings_ = 0;
-    GameData::player_hand_.clear();
+    Gui::animations_.push(std::make_shared<CollectionAnimation>());
 }
 
 bool GameState::state_changed_ = true;

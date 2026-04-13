@@ -12,6 +12,7 @@ void DoubleState::Init(){
 }
 
 void DoubleState::Resolve(bool success){
+    Gui::animations_.push(std::make_shared<RevealAnimation>());
     GameData::player_hand_[0].FaceUp();
     int rank = GameData::player_hand_[0].GetRank();
 

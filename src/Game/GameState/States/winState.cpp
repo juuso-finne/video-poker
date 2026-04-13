@@ -14,14 +14,14 @@ void WinState::Init(){
 
 void WinState::Double(){
 
-    GameData::player_hand_.clear();
     GameData::deck_.Reset();
 
-    Card card = GameData::deck_.DealOne();
     float y = ScreenConstants::hand_position_.y;
     float x = (ScreenConstants::screen_width_ - ScreenConstants::card_width_) / 2;
-    card.Move({x, y}, 500);
-    GameData::player_hand_.push_back(card);
+
+    Gui::animations_.push(std::make_shared<CollectionAnimation>());
+    Gui::animations_.push(std::make_shared<ShuffleAnimation>());
+    Gui::animations_.push(std::make_shared<DealAnimation>(std::vector<Vector2>{{x, y}}));
 
     ChangeState(DoubleState::Instance());
 }

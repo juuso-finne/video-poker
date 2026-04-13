@@ -15,37 +15,21 @@ void DrawState::Init(){
 }
 
 void DrawState::Deal(){
-    std::vector<Card> new_hand;
+    std::vector<Vector2> positions;
 
     for (int i = 0; i < 5; i++){
-        Card old_card = GameData::player_hand_[i];
-        if(GameData::held_cards_[i]){
-            new_hand.push_back(old_card);
-            GameData::held_cards_[i] = false;
-        } else{
-            Card new_card = GameData::deck_.DealOne();
-            new_card.FaceUp();
-            new_card.Move(old_card.GetPosition(), 500);
-            new_hand.push_back(new_card);
+        if(!GameData::held_cards_[i]){
+            positions.push_back(GameData::player_hand_[i].GetPosition());
         }
     }
-    GameData::player_hand_ = new_hand;
+
+    Gui::animations_.push(std::make_shared<DropAnimation>());
+    Gui::animations_.push(std::make_shared<DealAnimation>(positions));
+    Gui::animations_.push(std::make_shared<RevealAnimation>());
+
     GameData::deck_.Reset();
+    ChangeState(EvaluationState::Instance());
 
-    HandValue value = EvaluateHand(GameData::player_hand_);
-    int coefficient = payout_table[value];
-
-    if(coefficient == 0){
-        std::cout
-            << "No win! Total winnings: " << GameData::total_winnings_ << std::endl
-            << "Total bets: " << GameData::total_bets_ << std::endl
-            << "Net profit: " << GameData::total_winnings_ - GameData::total_bets_ << std::endl;
-        ChangeState(InitialState::Instance());
-    } else{
-        GameData::current_winnings_ = coefficient * GameData::bet_;
-        std::cout << "You won " << GameData::current_winnings_ << "! Do you want to double?" << std::endl;
-        ChangeState(WinState::Instance());
-    }
 }
 
 void DrawState::Hold(int index){
