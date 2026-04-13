@@ -22,6 +22,8 @@ void Gui::Update(const Texture2D &spritesheet){
         UpdateAndDrawCard(spritesheet, card);
     }
 
+    DrawHoldIndicators();
+
     ButtonManager::DrawButtons();
 }
 
@@ -45,7 +47,7 @@ void Gui::PlayAnimations(){
     Animation::animation_cards_.clear();
 }
 
-void Gui::UpdateAndDrawCard(const Texture2D &spritesheet, Card &card){
+void UpdateAndDrawCard(const Texture2D &spritesheet, Card &card){
     card.Update();
 
     float card_width = ScreenConstants::card_width_;
@@ -59,12 +61,38 @@ void Gui::UpdateAndDrawCard(const Texture2D &spritesheet, Card &card){
     DrawTextureRec(spritesheet, source, card.GetPosition(), WHITE);
 }
 
-void Gui::DrawDeck(const Texture2D &spritesheet){
+void DrawDeck(const Texture2D &spritesheet){
     float margin = 2;
     Vector2 position = GameData::deck_.GetPosition();
     for(int i = 10; i >= 0; i--){
         Vector2 offset = {i * margin, i * margin};
         Card c = {Vector2Add(position, offset), 1, Suit::kClubs};
         UpdateAndDrawCard(spritesheet, c);
+    }
+}
+
+void DrawHoldIndicators(int font_size){
+
+    int height = 30;
+    int width = ScreenConstants::card_width_;
+    std::vector<Vector2> positions = ScreenConstants::GetCardSlots();
+
+    float text_width = MeasureText("HOLD", font_size);
+
+    Vector2 origin = {text_width/2, (float)font_size/2};
+
+
+    for(int i = 0; i < 5; i++){
+        if(!GameData::held_cards_[i]){
+            continue;
+        }
+
+        Vector2 position = positions[i];
+
+        int x = position.x;
+        int y = position.y + (ScreenConstants::card_height_ - height) / 2;
+
+        DrawRectangle(x, y, width, height, Color{0, 0, 0, 192});
+        DrawTextPro(GetFontDefault(), "HOLD", {(float)x + width/2, y + (float)height/2}, origin, 0, font_size, 1, RED);
     }
 }
