@@ -58,3 +58,10 @@ class DropAnimation: public Animation{
         bool dropped_cards_[5];
         std::vector<Card> new_hand_;
 };
+
+class CollectionAnimation: public Animation{
+    public:
+        CollectionAnimation();
+        bool IsPlaying() override;
+        void Init() override;
+};
