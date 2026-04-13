@@ -10,28 +10,33 @@ void PrintPayouts(int margin, int font_size){
     std::string name_column_string;
     std::string value_column_string;
 
-    ConstructColums(name_column_string, value_column_string);
+    const int row_spacing = 5;
+    Color default_color = WHITE;
+    Color highlight_color = RED;
 
-    const char * name_column = name_column_string.c_str();
-    const char * value_column = value_column_string.c_str();
+    const std::vector<std::pair<const char*, HandValue>> list = GetNameValuePairs();
 
     int value_column_x_pos = ScreenConstants::screen_width_ - MeasureText("xx.xx", font_size) - margin;
-    int name_column_x_pos = value_column_x_pos - margin - MeasureText(name_column, font_size);
+    int name_column_x_pos = value_column_x_pos - margin - MeasureText("STRAIGHT FLUSH", font_size);
 
-    DrawText(name_column, name_column_x_pos, margin, font_size, WHITE);
-    DrawText(value_column, value_column_x_pos, margin, font_size, WHITE);
-}
+    for (size_t row = 0; row < list.size(); row++){
 
-void ConstructColums(std::string &name_column, std::string &value_column){
-    for (std::pair<const char*, HandValue> pair: GetNameValuePairs()){
+        const char* name = list[row].first;
+        const HandValue hand_value = list[row].second;
 
-        const char* name = pair.first;
-        const HandValue hand_value = pair.second;
+        bool highlight =
+            GameData::current_winnings_ > 0 &&
+            EvaluateHand(GameData::player_hand_) == hand_value;
 
-        name_column += name + std::string("\n");
+        Color color = highlight ? highlight_color : default_color;
 
-        int payout = GameData::bet_ * payout_table[hand_value];
-        value_column += ConvertToDecimal(payout) + std::string("\n");
+        const int payout = payout_table[hand_value] * GameData::bet_;
+        const char* payout_chars = ConvertToDecimal(payout);
+
+        int y = margin + row * (font_size + row_spacing);
+
+        DrawText(name, name_column_x_pos, y, font_size, color);
+        DrawText(payout_chars, value_column_x_pos, y, font_size, color);
     }
 }
 
