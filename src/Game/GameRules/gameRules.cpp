@@ -4,6 +4,10 @@
 
 HandValue EvaluateHand(const std::vector<Card> &hand){
 
+    if(hand.size() != 5){
+        return HandValue::kNone;
+    }
+
     std::map<int, int> rank_histogram;
     std::map<Suit, int> suit_histogram;
     ConstructHistograms(rank_histogram, suit_histogram, hand);
