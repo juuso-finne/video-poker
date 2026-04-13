@@ -26,3 +26,13 @@ class ShuffleAnimation: public Animation{
     private:
         Timer timer_;
 };
+
+class DealAnimation: public Animation{
+    public:
+        DealAnimation();
+        DealAnimation(const std::vector<Vector2> &positions);
+        bool IsPlaying() override;
+        void Init() override;
+    private:
+        std::vector<Vector2> positions_;
+};
