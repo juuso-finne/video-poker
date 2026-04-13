@@ -1,13 +1,45 @@
 #include "gui.h"
 #include "../Game/GameData/gameData.h"
 #include <raymath.h>
+#include <iostream>
+
+std::queue<std::shared_ptr<Animation>> Gui::animations_;
+bool Gui::animation_playing_ = false;
 
 void Gui::Update(const Texture2D &spritesheet){
-    ButtonManager::DrawButtons();
+
+    PlayAnimations();
+    DrawDeck(spritesheet);
+
+    for(Card &card: Animation::animation_cards_){
+        UpdateAndDrawCard(spritesheet, card);
+    }
+
     for (Card &card: GameData::player_hand_){
         UpdateAndDrawCard(spritesheet, card);
     }
-    DrawDeck(spritesheet);
+
+    ButtonManager::DrawButtons();
+}
+
+void Gui::PlayAnimations(){
+
+    animation_playing_ = false;
+
+    while(!animations_.empty()){
+
+        std::shared_ptr<Animation> animation = animations_.front();
+        animation_playing_ = animation -> IsPlaying();
+
+        if (animation_playing_){
+            animation -> Play();
+            return;
+        } else{
+            animations_.pop();
+        }
+    }
+
+    Animation::animation_cards_.clear();
 }
 
 void Gui::UpdateAndDrawCard(const Texture2D &spritesheet, Card &card){
