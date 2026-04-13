@@ -27,9 +27,7 @@ void DrawState::Deal(){
     Gui::animations_.push(std::make_shared<DealAnimation>(positions));
     Gui::animations_.push(std::make_shared<RevealAnimation>());
 
-    GameData::deck_.Reset();
     ChangeState(EvaluationState::Instance());
-
 }
 
 void DrawState::Hold(int index){
