@@ -86,3 +86,15 @@ class DoubleState: public GameState{
         void Win();
         void Lose();
 };
+
+class EvaluationState: public GameState{
+    public:
+        static EvaluationState* Instance();
+        void Init() override;
+
+    protected:
+       EvaluationState();
+
+    private:
+        static EvaluationState evaluation_state_;
+};
