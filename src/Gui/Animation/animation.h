@@ -46,3 +46,15 @@ class RevealAnimation: public Animation{
     private:
         Timer stagger_timer_;
 };
+
+class DropAnimation: public Animation{
+    public:
+        DropAnimation();
+        bool IsPlaying() override;
+        void Update() override;
+
+    private:
+        Timer stagger_timer_;
+        bool dropped_cards_[5];
+        std::vector<Card> new_hand_;
+};
