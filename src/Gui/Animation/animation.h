@@ -36,3 +36,13 @@ class DealAnimation: public Animation{
     private:
         std::vector<Vector2> positions_;
 };
+
+class RevealAnimation: public Animation{
+    public:
+        RevealAnimation();
+        bool IsPlaying() override;
+        void Update() override;
+
+    private:
+        Timer stagger_timer_;
+};
