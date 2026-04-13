@@ -73,7 +73,7 @@ void HoldButton::OnClick(){
 }
 
 CashOutButton::CashOutButton(): Button(){
-    text_ = "CASH OUT";
+    text_ = "COLLECT";
     float x = padding_;
     float y = ScreenConstants::screen_height_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
