@@ -1,0 +1,28 @@
+#pragma once
+#include "../../Timer/timer.h"
+#include <vector>
+#include "../../Card/card.h"
+
+class Animation{
+    public:
+        static std::vector<Card> animation_cards_;
+        Animation();
+
+        virtual bool IsPlaying() = 0;
+        virtual void Play();
+        virtual void Init();
+        virtual void Update();
+
+        bool is_initialized_;
+};
+
+class ShuffleAnimation: public Animation{
+    public:
+        ShuffleAnimation();
+        void Init() override;
+        bool IsPlaying() override;
+        void Update() override;
+        Vector2 RandomVector(float max = 10);
+    private:
+        Timer timer_;
+};
