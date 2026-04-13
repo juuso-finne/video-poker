@@ -12,6 +12,7 @@ void GameState::Big(){}
 GameState::GameState(){}
 
 void GameState::ChangeState(GameState *new_state){
+    state_changed_ = true;
     ButtonManager::DisableButtons();
     GameData::state_ = new_state;
 }
@@ -21,3 +22,5 @@ void GameState::Reset(){
     GameData::current_winnings_ = 0;
     GameData::player_hand_.clear();
 }
+
+bool GameState::state_changed_ = true;
