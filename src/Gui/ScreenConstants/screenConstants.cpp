@@ -1,7 +1,7 @@
 #include "ScreenConstants.h"
 
-float ScreenConstants::screen_height_ = 600;
-float ScreenConstants::screen_width_ = 800;
+float ScreenConstants::screen_height_ = 768;
+float ScreenConstants::screen_width_ = 1024;
 
 float ScreenConstants::card_width_ = 75;
 float ScreenConstants::card_height_ = 112;
