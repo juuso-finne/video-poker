@@ -6,6 +6,10 @@ float ScreenConstants::screen_width_ = 1024;
 float ScreenConstants::card_width_ = 75;
 float ScreenConstants::card_height_ = 112;
 
+float ScreenConstants::button_width_ = 128;
+float ScreenConstants::button_height_ = 64;
+float ScreenConstants::button_padding_ = 20;
+
 Vector2 ScreenConstants::deck_position_ = {25, 25};
 Vector2 ScreenConstants::hand_position_ = {25, 300};
 

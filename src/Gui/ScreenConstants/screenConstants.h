@@ -10,6 +10,10 @@ class ScreenConstants{
         static float card_width_;
         static float card_height_;
 
+        static float button_height_;
+        static float button_width_;
+        static float button_padding_;
+
         static Vector2 deck_position_;
         static Vector2 hand_position_;
 
