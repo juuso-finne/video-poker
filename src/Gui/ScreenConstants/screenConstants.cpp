@@ -15,7 +15,7 @@ float ScreenConstants::button_width_ = 128;
 float ScreenConstants::button_height_ = 64;
 float ScreenConstants::button_gap_ = 20;
 
-Vector2 ScreenConstants::deck_position_ = {25, 25};
+Vector2 ScreenConstants::deck_position_ = {25, 125};
 
 std::vector<Vector2> ScreenConstants::GetCardSlots(){
 
