@@ -3,7 +3,7 @@
 #include "ButtonManager/buttonManager.h"
 #include "ScreenConstants/screenConstants.h"
 #include "Animation/animation.h"
-#include "TextHandling/textSettings.h"
+#include "TextHandling/textHandling.h"
 #include "../Card/card.h"
 #include "../Game/GameRules/gameRules.h"
 #include <memory>
@@ -23,7 +23,6 @@ const char *ConvertToDecimal(int value);
 
 void UpdateAndDrawCard(const Texture2D &spritesheet, Card &card);
 void DrawDeck(const Texture2D &spritesheet);
-void PrintPayouts(const TextSettings &text_settings);
 void DrawHoldIndicators(int font_size = 12);
 
 std::vector<std::pair<const char*, HandValue>> GetNameValuePairs();

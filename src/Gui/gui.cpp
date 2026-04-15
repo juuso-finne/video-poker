@@ -12,7 +12,7 @@ void Gui::Update(const Texture2D &spritesheet){
     PlayAnimations();
     DrawDeck(spritesheet);
 
-    PrintPayouts(TextSettings());
+    PrintTexts();
 
     for(Card &card: Animation::animation_cards_){
         UpdateAndDrawCard(spritesheet, card);

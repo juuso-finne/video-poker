@@ -1,16 +1,35 @@
 #include "../gui.h"
 #include <string>
 #include "../../Game/GameData/gameData.h"
+#include "textHandling.h"
 
 const char *ConvertToDecimal(int value){
     return TextFormat("%d.%02d", value/100, value%100);
 }
 
+void PrintTexts(){
+    PrintPayouts(TextSettings{30, 30, 10, 100, 5, 3, 5});
+    PrintTotalBets(TextSettings());
+}
+
+void PrintTotalBets(const TextSettings &text_settings){
+
+    const char* total_bets_text = ConvertToDecimal(GameData::total_bets_);
+
+    std::string output = std::string("TOTAL BETS: ") + std::string(total_bets_text);
+
+    float x = ScreenConstants::screen_width_ - text_settings.MeasureWidth(output.c_str()) - text_settings.margin_x_ - text_settings.padding_;
+    float y = text_settings.margin_y_;
+
+    DrawTextEx(text_settings.font_, output.c_str(), {x, y}, text_settings.font_size_, text_settings.text_spacing_, WHITE);
+}
+
+void PrintTotalWins(const TextSettings &text_settings){
+}
+
 void PrintPayouts(const TextSettings &text_settings){
     std::string name_column_string;
     std::string value_column_string;
-
-    Font font = GetFontDefault();
 
     Color default_color = WHITE;
     Color highlight_color = RED;
@@ -19,8 +38,8 @@ void PrintPayouts(const TextSettings &text_settings){
 
     int screen_width = ScreenConstants::screen_width_;
 
-    int value_column_x_pos = screen_width - MeasureTextEx(font ,"xx.xx", text_settings.font_size_, text_settings.text_spacing_).x - text_settings.column_gap_;
-    int name_column_x_pos = value_column_x_pos - text_settings.column_gap_ - MeasureTextEx(font, "STRAIGHT FLUSH", text_settings.font_size_, text_settings.text_spacing_).x;
+    int value_column_x_pos = screen_width - MeasureTextEx(text_settings.font_ ,"xx.xx", text_settings.font_size_, text_settings.text_spacing_).x - text_settings.column_gap_;
+    int name_column_x_pos = value_column_x_pos - text_settings.column_gap_ - MeasureTextEx(text_settings.font_, "STRAIGHT FLUSH", text_settings.font_size_, text_settings.text_spacing_).x;
 
     for (size_t row = 0; row < list.size(); row++){
 
@@ -36,10 +55,10 @@ void PrintPayouts(const TextSettings &text_settings){
         int payout = payout_table[hand_value] * GameData::bet_;
         const char* kPayoutAsText = ConvertToDecimal(payout);
 
-        int y = text_settings.column_gap_ + row * (text_settings.font_size_ + text_settings.row_spacing_);
+        int y = text_settings.margin_y_ + row * (text_settings.font_size_ + text_settings.row_spacing_);
 
-        DrawTextEx(font, kName, {(float)name_column_x_pos, (float)y}, text_settings.font_size_, text_settings.text_spacing_, color);
-        DrawTextEx(font, kPayoutAsText, {(float)value_column_x_pos, (float)y}, text_settings.font_size_, text_settings.text_spacing_, color);
+        DrawTextEx(text_settings.font_, kName, {(float)name_column_x_pos, (float)y}, text_settings.font_size_, text_settings.text_spacing_, color);
+        DrawTextEx(text_settings.font_, kPayoutAsText, {(float)value_column_x_pos, (float)y}, text_settings.font_size_, text_settings.text_spacing_, color);
     }
 }
 
