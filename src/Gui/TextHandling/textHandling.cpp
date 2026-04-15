@@ -9,6 +9,7 @@ const char *ConvertToDecimal(int value){
 
 void PrintTexts(){
     PrintPayouts(TextSettings{30, 30, 10, 100, 5, 3, 5});
+    PrintTotalWins(TextSettings());
     PrintTotalBets(TextSettings());
 }
 
@@ -25,6 +26,14 @@ void PrintTotalBets(const TextSettings &text_settings){
 }
 
 void PrintTotalWins(const TextSettings &text_settings){
+    const char* total_bets_text = ConvertToDecimal(GameData::total_winnings_);
+
+    std::string output = std::string("TOTAL WINNINGS: ") + std::string(total_bets_text);
+
+    float x = text_settings.margin_x_ + text_settings.padding_;
+    float y = text_settings.margin_y_;
+
+    DrawTextEx(text_settings.font_, output.c_str(), {x, y}, text_settings.font_size_, text_settings.text_spacing_, WHITE);
 }
 
 void PrintPayouts(const TextSettings &text_settings){
