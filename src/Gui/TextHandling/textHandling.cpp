@@ -9,6 +9,7 @@ const char *ConvertToDecimal(int value){
 
 void PrintTexts(){
     PrintPayouts(TextSettings{30, 30, 10, 100, 5, 3, 5});
+    PrintBet(TextSettings());
     PrintTotalWins(TextSettings());
     PrintTotalBets(TextSettings());
 }
@@ -34,6 +35,22 @@ void PrintTotalWins(const TextSettings &text_settings){
     float y = text_settings.margin_y_;
 
     DrawTextEx(text_settings.font_, output.c_str(), {x, y}, text_settings.font_size_, text_settings.text_spacing_, WHITE);
+}
+
+void PrintBet(const TextSettings &text_settings){
+
+    const char* text = ConvertToDecimal(GameData::bet_);
+
+    Vector2 origin = {text_settings.MeasureWidth(text) / 2, text_settings.font_size_ / 2};
+
+    float radius = text_settings.MeasureWidth("x.xx") / 2 + text_settings.padding_;
+    float x = ScreenConstants::screen_width_ / 2;
+    float y = text_settings.margin_y_ + radius;
+
+    Color dark_yellow = {140, 100, 0 ,255};
+    DrawCircle(x + 5, y, radius, dark_yellow);
+    DrawCircle(x, y, radius, YELLOW);
+    DrawTextPro(text_settings.font_, text, {x, y}, origin, 0, text_settings.font_size_, text_settings.text_spacing_, BLACK);
 }
 
 void PrintPayouts(const TextSettings &text_settings){
