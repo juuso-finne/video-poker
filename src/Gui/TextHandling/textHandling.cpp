@@ -8,8 +8,8 @@ const char *ConvertToDecimal(int value){
 }
 
 void PrintTexts(){
-    PrintPayouts(TextSettings{30, 30, 10, 100, 5, 3, 5});
-    PrintBet(TextSettings());
+    PrintPayouts(TextSettings(30, 30, 10, 100, 5, 3, 5));
+    PrintBet(TextSettings(30, 32, 10, 10, 10, 3, 5));
     PrintTotalWins(TextSettings());
     PrintTotalBets(TextSettings());
 }
@@ -19,9 +19,10 @@ void PrintTotalBets(const TextSettings &text_settings){
     const char* total_bets_text = ConvertToDecimal(GameData::total_bets_);
 
     std::string output = std::string("TOTAL BETS: ") + std::string(total_bets_text);
+    float text_width = text_settings.MeasureWidth("TOTAL BETS: XXX.XX");
 
-    float x = ScreenConstants::screen_width_ - text_settings.MeasureWidth(output.c_str()) - text_settings.margin_x_ - text_settings.padding_;
-    float y = text_settings.margin_y_;
+    float x = ScreenConstants::screen_width_ - text_width - text_settings.margin_x_ - text_settings.padding_;
+    float y = text_settings.margin_y_ + text_settings.padding_;
 
     DrawTextEx(text_settings.font_, output.c_str(), {x, y}, text_settings.font_size_, text_settings.text_spacing_, WHITE);
 }
@@ -30,9 +31,10 @@ void PrintTotalWins(const TextSettings &text_settings){
     const char* total_bets_text = ConvertToDecimal(GameData::total_winnings_);
 
     std::string output = std::string("TOTAL WINNINGS: ") + std::string(total_bets_text);
+    float text_width = text_settings.MeasureWidth("TOTAL WINNINGS: XXX.XX");
 
     float x = text_settings.margin_x_ + text_settings.padding_;
-    float y = text_settings.margin_y_;
+    float y = text_settings.margin_y_ + text_settings.padding_;
 
     DrawTextEx(text_settings.font_, output.c_str(), {x, y}, text_settings.font_size_, text_settings.text_spacing_, WHITE);
 }
@@ -40,17 +42,31 @@ void PrintTotalWins(const TextSettings &text_settings){
 void PrintBet(const TextSettings &text_settings){
 
     const char* text = ConvertToDecimal(GameData::bet_);
+    float text_width = text_settings.MeasureWidth("x.xx");
 
-    Vector2 origin = {text_settings.MeasureWidth(text) / 2, text_settings.font_size_ / 2};
+    Vector2 origin = {(float)text_settings.MeasureWidth(text) / 2, (float)text_settings.font_size_ / 2};
 
-    float radius = text_settings.MeasureWidth("x.xx") / 2 + text_settings.padding_;
+    float radius = text_width / 2 + text_settings.padding_;
     float x = ScreenConstants::screen_width_ / 2;
     float y = text_settings.margin_y_ + radius;
 
     Color dark_yellow = {140, 100, 0 ,255};
     DrawCircle(x + 5, y, radius, dark_yellow);
-    DrawCircle(x, y, radius, YELLOW);
+    DrawCircle(x, y, radius, GOLD);
     DrawTextPro(text_settings.font_, text, {x, y}, origin, 0, text_settings.font_size_, text_settings.text_spacing_, BLACK);
+}
+
+void DrawTextBox(Vector2 text_position, float text_width, int text_height, float padding){
+
+    float x = text_position.x - padding;
+    float y = text_position.y - padding;
+
+    float width = text_width + 2 * padding;
+    float height = text_height + 2 * padding;
+
+    Rectangle dest{x, y, width, height};
+    DrawRectangleRoundedLines(dest, .1, 1, LIGHTGRAY);
+    //DrawRectangleLines(x, y, width, height, LIGHTGRAY);
 }
 
 void PrintPayouts(const TextSettings &text_settings){
@@ -64,8 +80,18 @@ void PrintPayouts(const TextSettings &text_settings){
 
     int screen_width = ScreenConstants::screen_width_;
 
-    int value_column_x_pos = screen_width - MeasureTextEx(text_settings.font_ ,"xx.xx", text_settings.font_size_, text_settings.text_spacing_).x - text_settings.column_gap_;
-    int name_column_x_pos = value_column_x_pos - text_settings.column_gap_ - MeasureTextEx(text_settings.font_, "STRAIGHT FLUSH", text_settings.font_size_, text_settings.text_spacing_).x;
+    float value_column_width = MeasureTextEx(text_settings.font_ ,"xx.xx", text_settings.font_size_, text_settings.text_spacing_).x;
+    float name_column_width = MeasureTextEx(text_settings.font_, "STRAIGHT FLUSH", text_settings.font_size_, text_settings.text_spacing_).x;
+
+
+    int value_column_x_pos = screen_width - value_column_width - text_settings.column_gap_ - text_settings.padding_;
+    int name_column_x_pos = value_column_x_pos - text_settings.column_gap_ - name_column_width - text_settings.padding_;
+
+    float y_offset = text_settings.margin_y_ + text_settings.padding_;
+    float total_width = name_column_width + value_column_width + text_settings.column_gap_;
+    float total_height = list.size() * text_settings.font_size_ + (list.size() - 1) * text_settings.row_spacing_;
+
+    DrawTextBox({(float)name_column_x_pos, y_offset}, total_width, total_height, text_settings.padding_);
 
     for (size_t row = 0; row < list.size(); row++){
 
@@ -81,7 +107,7 @@ void PrintPayouts(const TextSettings &text_settings){
         int payout = payout_table[hand_value] * GameData::bet_;
         const char* kPayoutAsText = ConvertToDecimal(payout);
 
-        int y = text_settings.margin_y_ + row * (text_settings.font_size_ + text_settings.row_spacing_);
+        int y = y_offset + row * (text_settings.font_size_ + text_settings.row_spacing_);
 
         DrawTextEx(text_settings.font_, kName, {(float)name_column_x_pos, (float)y}, text_settings.font_size_, text_settings.text_spacing_, color);
         DrawTextEx(text_settings.font_, kPayoutAsText, {(float)value_column_x_pos, (float)y}, text_settings.font_size_, text_settings.text_spacing_, color);
