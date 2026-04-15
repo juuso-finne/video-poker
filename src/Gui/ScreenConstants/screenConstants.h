@@ -17,7 +17,7 @@ class ScreenConstants{
 
         static float button_height_;
         static float button_width_;
-        static float button_padding_;
+        static float button_gap_;
 
         static Vector2 deck_position_;
         static Vector2 hand_position_;

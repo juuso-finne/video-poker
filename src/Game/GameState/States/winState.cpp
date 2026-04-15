@@ -16,7 +16,7 @@ void WinState::Double(){
 
     GameData::deck_.Reset();
 
-    float y = ScreenConstants::hand_position_.y;
+    float y = ScreenConstants::GetCardSlots()[0].y;
     float x = (ScreenConstants::screen_width_ - ScreenConstants::card_width_) / 2;
 
     Gui::animations_.push(std::make_shared<CollectionAnimation>());

@@ -8,23 +8,32 @@ float ScreenConstants::card_sprite_height_ = 112;
 
 float ScreenConstants::card_scaling_ = 1.5;
 
-float ScreenConstants::card_width_ = ScreenConstants::card_sprite_width_ * ScreenConstants::card_scaling_;
-float ScreenConstants::card_height_ = ScreenConstants::card_sprite_height_ * ScreenConstants::card_scaling_;
+float ScreenConstants::card_width_ = card_sprite_width_ * card_scaling_;
+float ScreenConstants::card_height_ = card_sprite_height_ * card_scaling_;
 
 float ScreenConstants::button_width_ = 128;
 float ScreenConstants::button_height_ = 64;
-float ScreenConstants::button_padding_ = 20;
+float ScreenConstants::button_gap_ = 20;
 
 Vector2 ScreenConstants::deck_position_ = {25, 25};
-Vector2 ScreenConstants::hand_position_ = {25, 300};
+
+Vector2 ScreenConstants::hand_position_ = {
+
+    button_gap_,
+
+    screen_height_
+    - 2 * button_height_
+    - 3 * button_gap_
+    - card_height_
+};
 
 std::vector<Vector2> ScreenConstants::GetCardSlots(){
 
     std::vector<Vector2> output;
-    float margin = 45;
+    float x_offset = button_gap_ + (button_width_ - card_width_) / 2;
 
     for (int i = 0; i < 5; i++){
-        float x = hand_position_.x + i * (margin + card_width_);
+        float x = x_offset + i * (button_gap_ + button_width_);
         output.push_back(Vector2{x, hand_position_.y});
     }
 

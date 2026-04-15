@@ -9,7 +9,7 @@ Button::Button()
 {
     width_ = ScreenConstants::button_width_;
     height_ = ScreenConstants::button_height_;
-    padding_ = ScreenConstants::button_padding_;
+    padding_ = ScreenConstants::button_gap_;
     enabled_ = false;
     color_enabled_ = 0xd3d3d3ff;
     color_disabled_ = 0xd3d3d3ff;
