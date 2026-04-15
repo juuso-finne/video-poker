@@ -9,12 +9,12 @@ struct TextSettings{
         int font_size,
         int margin_x,
         int margin_y,
-        int padding_,
+        int padding,
         float text_spacing,
         int row_spacing
     );
 
-    int MeasureWidth(const char* text);
+    int MeasureWidth(const char* text) const;
 
     int column_gap_;
     int font_size_;

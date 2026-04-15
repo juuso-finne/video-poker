@@ -29,7 +29,7 @@ TextSettings::TextSettings(
     row_spacing_ = row_spacing;
 }
 
-int TextSettings::MeasureWidth(const char *text)
+int TextSettings::MeasureWidth(const char *text) const
 {
     return MeasureTextEx(font_, text, font_size_, text_spacing_).x;
 }
