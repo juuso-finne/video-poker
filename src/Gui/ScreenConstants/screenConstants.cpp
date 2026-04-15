@@ -17,24 +17,15 @@ float ScreenConstants::button_gap_ = 20;
 
 Vector2 ScreenConstants::deck_position_ = {25, 25};
 
-Vector2 ScreenConstants::hand_position_ = {
-
-    button_gap_,
-
-    screen_height_
-    - 2 * button_height_
-    - 3 * button_gap_
-    - card_height_
-};
-
 std::vector<Vector2> ScreenConstants::GetCardSlots(){
 
     std::vector<Vector2> output;
     float x_offset = button_gap_ + (button_width_ - card_width_) / 2;
+    float y = screen_height_ - 2 * button_height_ - 3 * button_gap_ - card_height_;
 
     for (int i = 0; i < 5; i++){
         float x = x_offset + i * (button_gap_ + button_width_);
-        output.push_back(Vector2{x, hand_position_.y});
+        output.push_back(Vector2{x, y});
     }
 
     return output;
