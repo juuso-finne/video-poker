@@ -3,8 +3,13 @@
 float ScreenConstants::screen_height_ = 768;
 float ScreenConstants::screen_width_ = 1024;
 
-float ScreenConstants::card_width_ = 75;
-float ScreenConstants::card_height_ = 112;
+float ScreenConstants::card_sprite_width_ = 75;
+float ScreenConstants::card_sprite_height_ = 112;
+
+float ScreenConstants::card_scaling_ = 1.5;
+
+float ScreenConstants::card_width_ = ScreenConstants::card_sprite_width_ * ScreenConstants::card_scaling_;
+float ScreenConstants::card_height_ = ScreenConstants::card_sprite_height_ * ScreenConstants::card_scaling_;
 
 float ScreenConstants::button_width_ = 128;
 float ScreenConstants::button_height_ = 64;

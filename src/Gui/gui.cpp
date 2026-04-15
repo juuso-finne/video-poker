@@ -50,15 +50,23 @@ void Gui::PlayAnimations(){
 void UpdateAndDrawCard(const Texture2D &spritesheet, Card &card){
     card.Update();
 
+    float sprite_width = ScreenConstants::card_sprite_width_;
+    float sprite_height = ScreenConstants::card_sprite_height_;
+
+    float x_offset = (card.is_face_up_ ? (float)(card.GetRank() - 1) : 13.0) * sprite_width;
+    float y_offset = (card.is_face_up_ ? (float)card.GetSuitIndex() : 3.0) * sprite_height;
+
+    Rectangle source = {x_offset, y_offset, sprite_width, sprite_height};
+
     float card_width = ScreenConstants::card_width_;
     float card_height = ScreenConstants::card_height_;
 
-    float x_offset = (card.is_face_up_ ? (float)(card.GetRank() - 1) : 13.0) * card_width;
-    float y_offset = (card.is_face_up_ ? (float)card.GetSuitIndex() : 3.0) * card_height;
+    float x = card.GetPosition().x;
+    float y = card.GetPosition().y;
 
-    Rectangle source = {x_offset, y_offset, card_width, card_height};
+    Rectangle dest = {x, y, card_width, card_height};
 
-    DrawTextureRec(spritesheet, source, card.GetPosition(), WHITE);
+    DrawTexturePro(spritesheet, source, dest, {0,0}, 0, WHITE);
 }
 
 void DrawDeck(const Texture2D &spritesheet){
