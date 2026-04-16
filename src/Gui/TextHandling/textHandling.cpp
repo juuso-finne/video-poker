@@ -8,7 +8,7 @@ const char *ConvertToDecimal(int value){
 }
 
 void PrintTexts(){
-    PrintPayouts(TextSettings(30, 30, 10, 100, 5, 3, 5));
+    PrintPayouts(TextSettings(30, 30, 10, 100, 10, 3, 5));
     PrintBet(TextSettings(30, 32, 10, 10, 10, 3, 5));
     PrintTotalWins(TextSettings());
     PrintTotalBets(TextSettings());
@@ -25,6 +25,7 @@ void PrintTotalBets(const TextSettings &text_settings){
     float y = text_settings.margin_y_ + text_settings.padding_;
 
     DrawTextEx(text_settings.font_, output.c_str(), {x, y}, text_settings.font_size_, text_settings.text_spacing_, WHITE);
+    DrawTextBox({x, y}, text_width, text_settings.font_size_, text_settings.padding_);
 }
 
 void PrintTotalWins(const TextSettings &text_settings){
@@ -37,6 +38,7 @@ void PrintTotalWins(const TextSettings &text_settings){
     float y = text_settings.margin_y_ + text_settings.padding_;
 
     DrawTextEx(text_settings.font_, output.c_str(), {x, y}, text_settings.font_size_, text_settings.text_spacing_, WHITE);
+    DrawTextBox({x, y}, text_width, text_settings.font_size_, text_settings.padding_);
 }
 
 void PrintBet(const TextSettings &text_settings){
@@ -66,7 +68,6 @@ void DrawTextBox(Vector2 text_position, float text_width, int text_height, float
 
     Rectangle dest{x, y, width, height};
     DrawRectangleRoundedLines(dest, .1, 1, LIGHTGRAY);
-    //DrawRectangleLines(x, y, width, height, LIGHTGRAY);
 }
 
 void PrintPayouts(const TextSettings &text_settings){
