@@ -2,6 +2,7 @@
 #include <string>
 #include "../../Game/GameData/gameData.h"
 #include "textHandling.h"
+#include <raymath.h>
 
 const char *ConvertToDecimal(int value){
     return TextFormat("%d.%02d", value/100, value%100);
@@ -12,6 +13,7 @@ void PrintTexts(){
     PrintBet(TextSettings(30, 32, 10, 10, 10, 3, 5));
     PrintTotalWins(TextSettings());
     PrintTotalBets(TextSettings());
+    PrintCurrentWinnings(TextSettings());
 }
 
 void PrintTotalBets(const TextSettings &text_settings){
@@ -81,9 +83,8 @@ void PrintPayouts(const TextSettings &text_settings){
 
     int screen_width = ScreenConstants::screen_width_;
 
-    float value_column_width = MeasureTextEx(text_settings.font_ ,"xx.xx", text_settings.font_size_, text_settings.text_spacing_).x;
+    float value_column_width = MeasureTextEx(text_settings.font_ ,"XX.XX", text_settings.font_size_, text_settings.text_spacing_).x;
     float name_column_width = MeasureTextEx(text_settings.font_, "STRAIGHT FLUSH", text_settings.font_size_, text_settings.text_spacing_).x;
-
 
     int value_column_x_pos = screen_width - value_column_width - text_settings.column_gap_ - text_settings.padding_;
     int name_column_x_pos = value_column_x_pos - text_settings.column_gap_ - name_column_width - text_settings.padding_;
@@ -113,6 +114,30 @@ void PrintPayouts(const TextSettings &text_settings){
         DrawTextEx(text_settings.font_, kName, {(float)name_column_x_pos, (float)y}, text_settings.font_size_, text_settings.text_spacing_, color);
         DrawTextEx(text_settings.font_, kPayoutAsText, {(float)value_column_x_pos, (float)y}, text_settings.font_size_, text_settings.text_spacing_, color);
     }
+}
+
+void PrintCurrentWinnings(const TextSettings &text_settings){
+
+    if(GameData::current_winnings_ == 0){
+        return;
+    }
+
+    float text_width = text_settings.MeasureWidth("POT: XXX.XX");
+    float text_height = text_settings.font_size_;
+
+    float x = ScreenConstants::GetCardSlots()[2].x + ScreenConstants::card_width_ / 2;
+    float y =
+        ScreenConstants::screen_height_ - 2 * ScreenConstants::button_height_ - 3 * ScreenConstants::button_gap_
+        - ScreenConstants::card_height_ - text_settings.margin_y_ - text_settings.padding_
+        ;
+
+    const char* text = std::string(std::string("POT: ") + ConvertToDecimal(GameData::current_winnings_)).c_str();
+
+
+    Vector2 origin = {text_width / 2, text_height};
+
+    DrawTextPro(text_settings.font_, text, {x, y}, origin, 0, text_settings.font_size_, text_settings.text_spacing_, WHITE);
+    DrawTextBox(Vector2Subtract({x, y}, origin), text_width, text_settings.font_size_, text_settings.padding_);
 }
 
 std::vector<std::pair<const char*, HandValue>> GetNameValuePairs(){
