@@ -78,10 +78,6 @@ void PrintNetProfit(const TextSettings &text_settings){
 
     std::string output = std::string(net_profit < 0 ? "NET: -" : "NET: ") + std::string(ConvertToDecimal(net_profit));
 
-    if(net_profit < 0){
-        //output = std::string("-") + output;
-    }
-
     float x = 4 * (ScreenConstants::button_width_ + ScreenConstants::button_gap_) + ScreenConstants::button_gap_ + text_settings.padding_;
     float y = ScreenConstants::screen_height_ - ScreenConstants::button_gap_ - ScreenConstants::button_height_ + text_settings.padding_;
 
