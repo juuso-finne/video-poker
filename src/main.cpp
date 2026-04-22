@@ -42,7 +42,7 @@ int main()
 
 
         BeginDrawing();
-        ClearBackground(BLACK);
+        ClearBackground(ScreenConstants::background_color_);
 
         //Gui::PlayAnimations();
         Gui::Update(card_sprite_sheet);

@@ -19,6 +19,8 @@ float ScreenConstants::button_gap_ = 20;
 
 Vector2 ScreenConstants::deck_position_ = {25, 125};
 
+Color ScreenConstants::background_color_ = Color{0, 0, 75, 255};
+
 std::vector<Vector2> ScreenConstants::GetCardSlots(){
 
     std::vector<Vector2> output;
