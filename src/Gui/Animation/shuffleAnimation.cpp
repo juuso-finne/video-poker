@@ -8,6 +8,7 @@ ShuffleAnimation::ShuffleAnimation(){
 }
 
 void ShuffleAnimation::Init(){
+    PlaySound(AudioManager::shuffle_sound_);
     for (int i = 0; i < 10; i++){
         Card c{ScreenConstants::deck_position_, 1, Suit::kClubs};
         animation_cards_.push_back(c);
@@ -25,6 +26,8 @@ bool ShuffleAnimation::IsPlaying(){
             return true;
         }
     }
+
+    StopSound(AudioManager::shuffle_sound_);
     return false;
 }
 

@@ -5,6 +5,7 @@
 class AudioManager{
     public:
         static Sound coin_sound_;
+        static Sound shuffle_sound_;
 };
 
 void LoadSounds();
