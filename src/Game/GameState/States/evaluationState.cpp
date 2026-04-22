@@ -23,7 +23,10 @@ void EvaluationState::Init(){
             << "Net profit: " << GameData::total_winnings_ - GameData::total_bets_ << std::endl;
         ChangeState(InitialState::Instance());
     } else{
-        GameData::current_winnings_ = coefficient * GameData::bet_;
+
+        int winning_sum = coefficient * GameData::bet_;
+        Gui::animations_.push(std::make_shared<TransferToCurrentWinningsAnimation>(winning_sum));
+
         std::cout << "You won " << GameData::current_winnings_ << "! Do you want to double?" << std::endl;
         ChangeState(WinState::Instance());
     }

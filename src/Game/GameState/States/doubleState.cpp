@@ -43,12 +43,12 @@ void DoubleState::Small(){
 }
 
 void DoubleState::Win(){
-    GameData::current_winnings_ *= 2;
     std::cout << "You won " << GameData::current_winnings_ << "!" << std::endl;
 
-    if(GameData::current_winnings_ >= 10000){
+    if(GameData::current_winnings_ > 10000){
         std::cout << "Maximum doubling reached." << std::endl;
-        GameData::total_winnings_ += GameData::current_winnings_;
+        Gui::animations_.push(std::make_shared<TransferToTotalWinnings>(GameData::current_winnings_));
+
         std::cout << "Total winnings: " << GameData::total_winnings_ << std::endl
         << "Total bets: " << GameData::total_bets_ << std::endl
         << "Net profit: " << GameData::total_winnings_ - GameData::total_bets_ << std::endl;
@@ -73,7 +73,7 @@ void DoubleState::ResolveSeven(){
     Suit suit = GameData::player_hand_[0].GetSuit();
 
     if( suit == Suit::kDiamonds || suit == Suit::kHearts){
-        GameData::total_winnings_ += GameData::current_winnings_;
+        Gui::animations_.push(std::make_shared<TransferToTotalWinnings>(GameData::current_winnings_ / 2));
     }
 
     Lose();

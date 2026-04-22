@@ -19,6 +19,7 @@ void WinState::Double(){
     float y = ScreenConstants::GetCardSlots()[0].y;
     float x = (ScreenConstants::screen_width_ - ScreenConstants::card_width_) / 2;
 
+    Gui::animations_.push(std::make_shared<TransferToCurrentWinningsAnimation>(GameData::current_winnings_));
     Gui::animations_.push(std::make_shared<CollectionAnimation>());
     Gui::animations_.push(std::make_shared<ShuffleAnimation>());
     Gui::animations_.push(std::make_shared<DealAnimation>(std::vector<Vector2>{{x, y}}));
@@ -27,7 +28,8 @@ void WinState::Double(){
 }
 
 void WinState::CashOut(){
-    GameData::total_winnings_ += GameData::current_winnings_;
+    Gui::animations_.push(std::make_shared<TransferToTotalWinnings>(GameData::current_winnings_));
+
     std::cout
         << "Collected: " << GameData::current_winnings_ << std::endl
         << "Total winnings: " << GameData::total_winnings_ << std::endl
