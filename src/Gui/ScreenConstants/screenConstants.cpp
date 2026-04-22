@@ -6,6 +6,8 @@ float ScreenConstants::screen_width_ = 1024;
 float ScreenConstants::card_sprite_width_ = 75;
 float ScreenConstants::card_sprite_height_ = 112;
 
+float ScreenConstants::deal_speed_ = 1000;
+
 float ScreenConstants::card_scaling_ = 1.5;
 
 float ScreenConstants::card_width_ = card_sprite_width_ * card_scaling_;

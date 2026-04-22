@@ -29,7 +29,7 @@ bool DealAnimation::IsPlaying()
 void DealAnimation::Init(){
     for(Vector2 position: positions_){
         Card card = GameData::deck_.DealOne();
-        card.Move(position, 500);
+        card.Move(position, ScreenConstants::deal_speed_);
         GameData::player_hand_.push_back(card);
     }
 }

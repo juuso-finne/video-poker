@@ -7,6 +7,8 @@ class ScreenConstants{
         static float screen_width_;
         static float screen_height_;
 
+        static float deal_speed_;
+
         static float card_sprite_width_;
         static float card_sprite_height_;
 
