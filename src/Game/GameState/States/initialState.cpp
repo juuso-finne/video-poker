@@ -8,6 +8,7 @@ InitialState::InitialState(){}
 InitialState *InitialState::Instance() { return &initial_state_; }
 
 void InitialState::Init(){
+    GameData::current_winnings_ = 0;
     ButtonManager::deal_button_.enabled_ = true;
     ButtonManager::bet_button_.enabled_ = true;
 }

@@ -19,7 +19,6 @@ void GameState::ChangeState(GameState *new_state){
 
 void GameState::Reset(){
     GameData::deck_.Reset();
-    GameData::current_winnings_ = 0;
     Gui::animations_.push(std::make_shared<CollectionAnimation>());
 }
 
