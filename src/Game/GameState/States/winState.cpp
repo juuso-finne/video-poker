@@ -15,13 +15,12 @@ void WinState::Double(){
 
     GameData::deck_.Reset();
 
-    float y = ScreenConstants::GetCardSlots()[0].y;
-    float x = (ScreenConstants::screen_width_ - ScreenConstants::card_width_) / 2;
+    Vector2 middle_slot = ScreenConstants::GetCardSlots()[2];
 
     Gui::animations_.push(std::make_shared<TransferToCurrentWinningsAnimation>(GameData::current_winnings_));
     Gui::animations_.push(std::make_shared<CollectionAnimation>());
     Gui::animations_.push(std::make_shared<ShuffleAnimation>());
-    Gui::animations_.push(std::make_shared<DealAnimation>(std::vector<Vector2>{{x, y}}));
+    Gui::animations_.push(std::make_shared<DealAnimation>(std::vector<Vector2>{middle_slot}));
 
     ChangeState(DoubleState::Instance());
 }
