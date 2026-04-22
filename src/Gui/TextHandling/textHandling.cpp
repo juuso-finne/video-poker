@@ -14,7 +14,6 @@ void PrintTexts(){
     PrintTotalWins(TextSettings());
     PrintTotalBets(TextSettings());
     PrintCurrentWinnings(TextSettings());
-    PrintNetProfit(TextSettings());
 }
 
 void PrintTotalBets(const TextSettings &text_settings){

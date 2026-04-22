@@ -10,7 +10,6 @@ void Gui::Update(const Texture2D &spritesheet){
 
     PlayAnimations();
     DrawDeck(spritesheet);
-
     PrintTexts();
 
     for(Card &card: Animation::animation_cards_){
@@ -23,6 +22,7 @@ void Gui::Update(const Texture2D &spritesheet){
 
     DrawHoldIndicators();
 
+    DrawBackPanel();
     ButtonManager::DrawButtons();
 }
 
@@ -102,4 +102,11 @@ void DrawHoldIndicators(int font_size){
         DrawRectangle(x, y, width, height, Color{0, 0, 0, 192});
         DrawTextPro(GetFontDefault(), "HOLD", {(float)x + width/2, y + (float)height/2}, origin, 0, font_size, 1, RED);
     }
+}
+
+void DrawBackPanel(){
+    int height = 2 * (ScreenConstants::button_height_ + ScreenConstants::button_gap_);
+    int y = ScreenConstants::screen_height_ - height;
+    DrawRectangle(0, y, ScreenConstants::screen_width_, height, ScreenConstants::background_color_);
+    PrintNetProfit(TextSettings());
 }
