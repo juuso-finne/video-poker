@@ -1,7 +1,6 @@
 #include "gui.h"
 #include "../Game/GameData/gameData.h"
 #include <raymath.h>
-#include <iostream>
 #include <raygui.h>
 
 std::queue<std::shared_ptr<Animation>> Gui::animations_;

@@ -1,5 +1,4 @@
 #include "../gameState.h"
-#include <iostream>
 #include "../../GameData/gameData.h"
 
 DoubleState DoubleState::double_state_;
@@ -43,29 +42,18 @@ void DoubleState::Small(){
 }
 
 void DoubleState::Win(){
-    std::cout << "You won " << GameData::current_winnings_ << "!" << std::endl;
 
     if(GameData::current_winnings_ > 10000){
-        std::cout << "Maximum doubling reached." << std::endl;
-        Gui::animations_.push(std::make_shared<TransferToTotalWinnings>(GameData::current_winnings_));
 
-        std::cout << "Total winnings: " << GameData::total_winnings_ << std::endl
-        << "Total bets: " << GameData::total_bets_ << std::endl
-        << "Net profit: " << GameData::total_winnings_ - GameData::total_bets_ << std::endl;
+        Gui::animations_.push(std::make_shared<TransferToTotalWinnings>(GameData::current_winnings_));
         ChangeState(InitialState::Instance());
         return;
     }
 
-    std::cout << "Do you want to double?" << std::endl;
     ChangeState(WinState::Instance());
 }
 
 void DoubleState::Lose(){
-    std::cout
-        << "No win! Total winnings: " << GameData::total_winnings_ << std::endl
-        << "Total bets: " << GameData::total_bets_ << std::endl
-        << "Net profit: " << GameData::total_winnings_ - GameData::total_bets_ << std::endl;
-
     ChangeState(InitialState::Instance());
 }
 

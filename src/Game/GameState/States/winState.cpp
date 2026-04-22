@@ -1,5 +1,4 @@
 #include "../gameState.h"
-#include <iostream>
 #include "../../GameData/gameData.h"
 
 
@@ -29,11 +28,5 @@ void WinState::Double(){
 
 void WinState::CashOut(){
     Gui::animations_.push(std::make_shared<TransferToTotalWinnings>(GameData::current_winnings_));
-
-    std::cout
-        << "Collected: " << GameData::current_winnings_ << std::endl
-        << "Total winnings: " << GameData::total_winnings_ << std::endl
-        << "Total bets: " << GameData::total_bets_ << std::endl
-        << "Net profit: " << GameData::total_winnings_ - GameData::total_bets_ << std::endl;
     ChangeState(InitialState::Instance());
 }

@@ -1,5 +1,4 @@
 #include "../gameState.h"
-#include <iostream>
 #include "../../GameData/gameData.h"
 #include "../../GameRules/gameRules.h"
 
@@ -32,13 +31,6 @@ void DrawState::Deal(){
 
 void DrawState::Hold(int index){
     GameData::held_cards_[index] = !GameData::held_cards_[index];
-    std::cout << "Cards held: ";
-    for (int i = 0; i < 5; i++){
-        if(GameData::held_cards_[i]){
-            std::cout << i << ", ";
-        }
-    }
-    std::cout << std::endl;
 }
 
 

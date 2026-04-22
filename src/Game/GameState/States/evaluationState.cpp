@@ -1,5 +1,4 @@
 #include "../gameState.h"
-#include <iostream>
 #include "../../GameData/gameData.h"
 #include "../../GameRules/gameRules.h"
 
@@ -17,17 +16,12 @@ void EvaluationState::Init(){
     int coefficient = payout_table[value];
 
     if(coefficient == 0){
-        std::cout
-            << "No win! Total winnings: " << GameData::total_winnings_ << std::endl
-            << "Total bets: " << GameData::total_bets_ << std::endl
-            << "Net profit: " << GameData::total_winnings_ - GameData::total_bets_ << std::endl;
         ChangeState(InitialState::Instance());
     } else{
 
         int winning_sum = coefficient * GameData::bet_;
         Gui::animations_.push(std::make_shared<TransferToCurrentWinningsAnimation>(winning_sum));
 
-        std::cout << "You won " << GameData::current_winnings_ << "! Do you want to double?" << std::endl;
         ChangeState(WinState::Instance());
     }
 }

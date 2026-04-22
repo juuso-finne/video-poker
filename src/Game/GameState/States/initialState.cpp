@@ -1,5 +1,4 @@
 #include "../gameState.h"
-#include <iostream>
 #include "../../GameData/gameData.h"
 #include "../../../Gui/gui.h"
 
@@ -27,7 +26,6 @@ void InitialState::Bet(){
     if(GameData::bet_ > 100){
         GameData::bet_ = 20;
     }
-    std::cout << "Current bet: " << GameData::bet_ << std::endl;
 }
 
 
