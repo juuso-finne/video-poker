@@ -23,6 +23,7 @@ void TransferAnimation::Update(){
         return;
     }
 
+    PlaySound(AudioManager::coin_sound_);
     stagger_timer_.Reset();
 
     if(amount_ > 500){

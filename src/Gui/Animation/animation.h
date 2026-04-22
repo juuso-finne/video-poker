@@ -2,6 +2,7 @@
 #include "../../Timer/timer.h"
 #include <vector>
 #include "../../Card/card.h"
+#include "../../Audio/audioManager.h"
 
 class Animation{
     public:
