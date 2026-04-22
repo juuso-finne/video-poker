@@ -98,11 +98,11 @@ void PrintPayouts(const TextSettings &text_settings){
 
     int screen_width = ScreenConstants::screen_width_;
 
-    float value_column_width = MeasureTextEx(text_settings.font_ ,"XX.XX", text_settings.font_size_, text_settings.text_spacing_).x;
-    float name_column_width = MeasureTextEx(text_settings.font_, "STRAIGHT FLUSH", text_settings.font_size_, text_settings.text_spacing_).x;
+    float value_column_width = text_settings.MeasureWidth("XX.XX");
+    float name_column_width = text_settings.MeasureWidth("STRAIGHT FLUSH");
 
-    int value_column_x_pos = screen_width - value_column_width - text_settings.column_gap_ - text_settings.padding_;
-    int name_column_x_pos = value_column_x_pos - text_settings.column_gap_ - name_column_width - text_settings.padding_;
+    int value_column_x_pos = screen_width - value_column_width - text_settings.margin_x_ - text_settings.padding_;
+    int name_column_x_pos = value_column_x_pos - text_settings.column_gap_ - name_column_width;
 
     float y_offset = text_settings.margin_y_ + text_settings.padding_;
     float total_width = name_column_width + value_column_width + text_settings.column_gap_;
@@ -151,8 +151,8 @@ void PrintCurrentWinnings(const TextSettings &text_settings){
 
     Vector2 origin = {text_width / 2, text_height};
 
-    DrawTextPro(text_settings.font_, text, {x, y}, origin, 0, text_settings.font_size_, text_settings.text_spacing_, WHITE);
-    DrawTextBox(Vector2Subtract({x, y}, origin), text_width, text_settings.font_size_, text_settings.padding_);
+    DrawTextPro(text_settings.font_, text, {x, y}, origin, 0, text_height, text_settings.text_spacing_, WHITE);
+    DrawTextBox(Vector2Subtract({x, y}, origin), text_width, text_height, text_settings.padding_);
 }
 
 std::vector<std::pair<const char*, HandValue>> GetNameValuePairs(){
