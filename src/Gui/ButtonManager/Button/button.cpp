@@ -7,10 +7,12 @@
 
 Button::Button()
 {
-    width_ = 100;
-    height_ = 50;
-    padding_ = 20;
+    width_ = ScreenConstants::button_width_;
+    height_ = ScreenConstants::button_height_;
+    padding_ = ScreenConstants::button_gap_;
     enabled_ = false;
+    color_enabled_ = 0xd3d3d3ff;
+    color_disabled_ = 0xd3d3d3ff;
 }
 
 void Button::OnClick(){}
@@ -22,6 +24,9 @@ void Button::Draw(){
         GuiDisable();
     }
 
+
+    GuiSetStyle(BUTTON, BASE_COLOR_NORMAL, color_enabled_);
+    GuiSetStyle(BUTTON, BASE_COLOR_DISABLED, color_disabled_);
     if(GuiButton(bounds_, text_)){
         OnClick();
     }
@@ -32,6 +37,8 @@ DealButton::DealButton(): Button(){
     float x = ScreenConstants::screen_width_ - padding_ - width_;
     float y = ScreenConstants::screen_height_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
+    color_enabled_ = 0x00ff00ff;
+    color_disabled_ = 0x082905ff;
 }
 
 void DealButton::OnClick(){
@@ -43,6 +50,8 @@ BetButton::BetButton(): Button(){
     float x = ScreenConstants::screen_width_ - padding_ - width_;
     float y = ScreenConstants::screen_height_ - 2 * (padding_ + height_);
     bounds_ = Rectangle{x, y, width_, height_};
+    color_enabled_ = 0x0000ffff;
+    color_disabled_ = 0x051029ff;
 }
 
 void BetButton::OnClick(){
@@ -55,6 +64,8 @@ HoldButton::HoldButton(int index): Button(){
     float y = ScreenConstants::screen_height_ - 2 * (padding_ + height_);
     bounds_ = Rectangle{x, y, width_, height_};
     index_ = index;
+    color_enabled_ = 0xff0000ff;
+    color_disabled_ = 0x290705ff;
 }
 
 void HoldButton::OnClick(){
@@ -62,10 +73,12 @@ void HoldButton::OnClick(){
 }
 
 CashOutButton::CashOutButton(): Button(){
-    text_ = "CASH OUT";
+    text_ = "COLLECT";
     float x = padding_;
     float y = ScreenConstants::screen_height_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
+    color_enabled_ = 0xe7ed28ff;
+    color_disabled_ = 0x3e4009ff;
 }
 
 void CashOutButton::OnClick(){
@@ -74,9 +87,11 @@ void CashOutButton::OnClick(){
 
 DoubleButton::DoubleButton(): Button(){
     text_ = "DOUBLE";
-    float x = width_ + 2 * padding_;
+    float x = 3 * width_ + 4 * padding_;
     float y = ScreenConstants::screen_height_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
+    color_enabled_ = 0xe37b19ff;
+    color_disabled_ = 0x3d2107ff;
 }
 
 void DoubleButton::OnClick(){
@@ -85,9 +100,11 @@ void DoubleButton::OnClick(){
 
 SmallButton::SmallButton(): Button(){
     text_ = "SMALL";
-    float x = 2 * width_ + 3 * padding_;
+    float x = width_ + 2 * padding_;
     float y = ScreenConstants::screen_height_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
+    color_enabled_ = 0xe37b19ff;
+    color_disabled_ = 0x3d2107ff;
 }
 
 void SmallButton::OnClick(){
@@ -96,9 +113,11 @@ void SmallButton::OnClick(){
 
 BigButton::BigButton(): Button(){
     text_ = "BIG";
-    float x = 3 * width_ + 4 * padding_;
+    float x = 2 * width_ + 3 * padding_;
     float y = ScreenConstants::screen_height_ - padding_ - height_;
     bounds_ = Rectangle{x, y, width_, height_};
+    color_enabled_ = 0xe37b19ff;
+    color_disabled_ = 0x3d2107ff;
 }
 
 void BigButton::OnClick(){

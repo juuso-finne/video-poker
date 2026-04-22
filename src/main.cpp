@@ -5,6 +5,7 @@
 #include "Game/GameState/gameState.h"
 #include "Game/GameRules/gameRules.h"
 #include <memory>
+#include <iostream>
 
 
 int main()
@@ -41,10 +42,15 @@ int main()
 
 
         BeginDrawing();
-        ClearBackground(BLACK);
-        GameData::state_ -> Init();
+        ClearBackground(ScreenConstants::background_color_);
+
+        //Gui::PlayAnimations();
         Gui::Update(card_sprite_sheet);
 
+        if(Gui::animations_.empty() && GameState::state_changed_){
+            GameState::state_changed_ = false;
+            GameData::state_ -> Init();
+        }
 
 /*         for (std::vector<Card>::iterator it = cards.begin(); it != cards.end();)
         {

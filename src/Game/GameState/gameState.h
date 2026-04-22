@@ -2,8 +2,6 @@
 #include <vector>
 #include "../../Gui/gui.h"
 
-
-
 class GameState{
     public:
         virtual void Init() = 0;
@@ -15,6 +13,8 @@ class GameState{
         virtual void Double();
         virtual void Small();
         virtual void Big();
+
+        static bool state_changed_;
 
     protected:
         GameState();
@@ -85,4 +85,16 @@ class DoubleState: public GameState{
         void ResolveSeven();
         void Win();
         void Lose();
+};
+
+class EvaluationState: public GameState{
+    public:
+        static EvaluationState* Instance();
+        void Init() override;
+
+    protected:
+       EvaluationState();
+
+    private:
+        static EvaluationState evaluation_state_;
 };

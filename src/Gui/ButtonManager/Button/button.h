@@ -14,6 +14,8 @@ class Button{
         Rectangle bounds_;
         const char *text_;
         bool enabled_;
+        int color_enabled_;
+        int color_disabled_;
     protected:
         float width_;
         float height_;

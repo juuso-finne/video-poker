@@ -1,30 +1,74 @@
 #include "gui.h"
 #include "../Game/GameData/gameData.h"
 #include <raymath.h>
+#include <raygui.h>
+
+std::queue<std::shared_ptr<Animation>> Gui::animations_;
+bool Gui::animation_playing_ = false;
 
 void Gui::Update(const Texture2D &spritesheet){
-    ButtonManager::DrawButtons();
+
+    PlayAnimations();
+    DrawDeck(spritesheet);
+    PrintTexts();
+
+    for(Card &card: Animation::animation_cards_){
+        UpdateAndDrawCard(spritesheet, card);
+    }
+
     for (Card &card: GameData::player_hand_){
         UpdateAndDrawCard(spritesheet, card);
     }
-    DrawDeck(spritesheet);
+
+    DrawHoldIndicators();
+
+    DrawBackPanel();
+    ButtonManager::DrawButtons();
 }
 
-void Gui::UpdateAndDrawCard(const Texture2D &spritesheet, Card &card){
+void Gui::PlayAnimations(){
+
+    animation_playing_ = false;
+
+    while(!animations_.empty()){
+
+        std::shared_ptr<Animation> animation = animations_.front();
+        animation_playing_ = animation -> IsPlaying();
+
+        if (animation_playing_){
+            animation -> Play();
+            return;
+        } else{
+            animations_.pop();
+        }
+    }
+
+    Animation::animation_cards_.clear();
+}
+
+void UpdateAndDrawCard(const Texture2D &spritesheet, Card &card){
     card.Update();
+
+    float sprite_width = ScreenConstants::card_sprite_width_;
+    float sprite_height = ScreenConstants::card_sprite_height_;
+
+    float x_offset = (card.is_face_up_ ? (float)(card.GetRank() - 1) : 13.0) * sprite_width;
+    float y_offset = (card.is_face_up_ ? (float)card.GetSuitIndex() : 3.0) * sprite_height;
+
+    Rectangle source = {x_offset, y_offset, sprite_width, sprite_height};
 
     float card_width = ScreenConstants::card_width_;
     float card_height = ScreenConstants::card_height_;
 
-    float x_offset = (card.is_face_up_ ? (float)(card.GetRank() - 1) : 13.0) * card_width;
-    float y_offset = (card.is_face_up_ ? (float)card.GetSuitIndex() : 3.0) * card_height;
+    float x = card.GetPosition().x;
+    float y = card.GetPosition().y;
 
-    Rectangle source = {x_offset, y_offset, card_width, card_height};
+    Rectangle dest = {x, y, card_width, card_height};
 
-    DrawTextureRec(spritesheet, source, card.GetPosition(), WHITE);
+    DrawTexturePro(spritesheet, source, dest, {0,0}, 0, WHITE);
 }
 
-void Gui::DrawDeck(const Texture2D &spritesheet){
+void DrawDeck(const Texture2D &spritesheet){
     float margin = 2;
     Vector2 position = GameData::deck_.GetPosition();
     for(int i = 10; i >= 0; i--){
@@ -32,4 +76,41 @@ void Gui::DrawDeck(const Texture2D &spritesheet){
         Card c = {Vector2Add(position, offset), 1, Suit::kClubs};
         UpdateAndDrawCard(spritesheet, c);
     }
+}
+
+void DrawHoldIndicators(){
+
+    int padding = 10;
+    float spacing = 3;
+
+    int height = ScreenConstants::card_height_ / 4;
+    int width = ScreenConstants::card_width_;
+    std::vector<Vector2> positions = ScreenConstants::GetCardSlots();
+
+    int font_size = height - 2 * padding;
+    float text_width = MeasureTextEx(GetFontDefault(), "HOLD", font_size, spacing).x;
+
+    Vector2 origin = {text_width/2, (float)font_size/2};
+
+
+    for(int i = 0; i < 5; i++){
+        if(!GameData::held_cards_[i]){
+            continue;
+        }
+
+        Vector2 position = positions[i];
+
+        int x = position.x;
+        int y = position.y + (ScreenConstants::card_height_ - height) / 2;
+
+        DrawRectangle(x, y, width, height, Color{0, 0, 0, 192});
+        DrawTextPro(GetFontDefault(), "HOLD", {(float)x + width/2, y + (float)height/2}, origin, 0, font_size, spacing, RED);
+    }
+}
+
+void DrawBackPanel(){
+    int height = 2 * (ScreenConstants::button_height_ + ScreenConstants::button_gap_);
+    int y = ScreenConstants::screen_height_ - height;
+    DrawRectangle(0, y, ScreenConstants::screen_width_, height, ScreenConstants::background_color_);
+    PrintNetProfit(TextSettings());
 }
