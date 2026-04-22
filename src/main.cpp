@@ -4,6 +4,7 @@
 #include "Game/GameData/gameData.h"
 #include "Game/GameState/gameState.h"
 #include "Game/GameRules/gameRules.h"
+#include "Audio/audioManager.h"
 #include <memory>
 #include <iostream>
 
@@ -16,6 +17,7 @@ int main()
 
     InitWindow(ScreenConstants::screen_width_, ScreenConstants::screen_height_, "Video poker");
     Texture2D card_sprite_sheet = LoadTexture("assets/graphics/card_spritesheet.png");
+    LoadSounds();
 
 
 
@@ -68,6 +70,7 @@ int main()
     }
 
     UnloadTexture(card_sprite_sheet);
+    UnloadSounds();
 
     CloseWindow();
 }
