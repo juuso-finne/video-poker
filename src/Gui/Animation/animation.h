@@ -65,3 +65,29 @@ class CollectionAnimation: public Animation{
         bool IsPlaying() override;
         void Init() override;
 };
+
+class TransferAnimation: public Animation{
+    public:
+        TransferAnimation(int amount);
+        bool IsPlaying() override;
+        void Update() override;
+    protected:
+        virtual void Transfer(int x) = 0;
+        Timer stagger_timer_;
+        int amount_;
+};
+
+class TransferToCurrentWinningsAnimation: public TransferAnimation{
+    public:
+        TransferToCurrentWinningsAnimation(int amount);
+    private:
+        void Transfer(int x) override;
+};
+
+class TransferToTotalWinnings: public TransferAnimation{
+    public:
+        TransferToTotalWinnings(int amount);
+    private:
+        void Transfer(int x) override;
+
+};
