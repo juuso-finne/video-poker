@@ -78,13 +78,17 @@ void DrawDeck(const Texture2D &spritesheet){
     }
 }
 
-void DrawHoldIndicators(int font_size){
+void DrawHoldIndicators(){
 
-    int height = 30;
+    int padding = 10;
+    float spacing = 3;
+
+    int height = ScreenConstants::card_height_ / 4;
     int width = ScreenConstants::card_width_;
     std::vector<Vector2> positions = ScreenConstants::GetCardSlots();
 
-    float text_width = MeasureText("HOLD", font_size);
+    int font_size = height - 2 * padding;
+    float text_width = MeasureTextEx(GetFontDefault(), "HOLD", font_size, spacing).x;
 
     Vector2 origin = {text_width/2, (float)font_size/2};
 
@@ -100,7 +104,7 @@ void DrawHoldIndicators(int font_size){
         int y = position.y + (ScreenConstants::card_height_ - height) / 2;
 
         DrawRectangle(x, y, width, height, Color{0, 0, 0, 192});
-        DrawTextPro(GetFontDefault(), "HOLD", {(float)x + width/2, y + (float)height/2}, origin, 0, font_size, 1, RED);
+        DrawTextPro(GetFontDefault(), "HOLD", {(float)x + width/2, y + (float)height/2}, origin, 0, font_size, spacing, RED);
     }
 }
 

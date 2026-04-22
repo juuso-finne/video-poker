@@ -23,7 +23,7 @@ const char *ConvertToDecimal(int value);
 
 void UpdateAndDrawCard(const Texture2D &spritesheet, Card &card);
 void DrawDeck(const Texture2D &spritesheet);
-void DrawHoldIndicators(int font_size = 12);
+void DrawHoldIndicators();
 void DrawBackPanel();
 
 std::vector<std::pair<const char*, HandValue>> GetNameValuePairs();
