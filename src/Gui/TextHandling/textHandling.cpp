@@ -5,7 +5,7 @@
 #include <raymath.h>
 
 const char *ConvertToDecimal(int value){
-    return TextFormat("%d.%02d", value/100, value%100);
+    return TextFormat("%d.%02d", abs(value/100), abs(value%100));
 }
 
 void PrintTexts(){
@@ -14,6 +14,7 @@ void PrintTexts(){
     PrintTotalWins(TextSettings());
     PrintTotalBets(TextSettings());
     PrintCurrentWinnings(TextSettings());
+    PrintNetProfit(TextSettings());
 }
 
 void PrintTotalBets(const TextSettings &text_settings){
@@ -70,6 +71,24 @@ void DrawTextBox(Vector2 text_position, float text_width, int text_height, float
 
     Rectangle dest{x, y, width, height};
     DrawRectangleRoundedLines(dest, .1, 1, LIGHTGRAY);
+}
+
+void PrintNetProfit(const TextSettings &text_settings){
+    int net_profit = GameData::total_winnings_ - GameData::total_bets_;
+
+    std::string output = std::string(net_profit < 0 ? "NET: -" : "NET: ") + std::string(ConvertToDecimal(net_profit));
+
+    if(net_profit < 0){
+        //output = std::string("-") + output;
+    }
+
+    float x = 4 * (ScreenConstants::button_width_ + ScreenConstants::button_gap_) + ScreenConstants::button_gap_ + text_settings.padding_;
+    float y = ScreenConstants::screen_height_ - ScreenConstants::button_gap_ - ScreenConstants::button_height_ + text_settings.padding_;
+
+    float text_width = text_settings.MeasureWidth("NET: -XXX.XX");
+
+    DrawTextEx(text_settings.font_, output.c_str(), {x, y}, text_settings.font_size_, text_settings.text_spacing_, WHITE);
+    DrawTextBox({x, y}, text_width, text_settings.font_size_, text_settings.padding_);
 }
 
 void PrintPayouts(const TextSettings &text_settings){
