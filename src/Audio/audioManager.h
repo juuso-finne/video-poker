@@ -8,6 +8,7 @@ class AudioManager{
         static Sound shuffle_sound_;
         static Sound flip_sound_;
         static Sound crash_sound_;
+        static Sound button_sound_;
 
         static Music victory_music_;
         static Music double_music_;
