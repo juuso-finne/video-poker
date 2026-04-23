@@ -3,6 +3,7 @@
 Sound AudioManager::coin_sound_ = Sound{};
 Sound AudioManager::shuffle_sound_ = Sound{};
 Sound AudioManager::deal_sound_ = Sound{};
+Sound AudioManager::crash_sound_ = Sound{};
 
 Music AudioManager::victory_music_ = Music{};
 Music AudioManager::double_music_ = Music{};
@@ -12,6 +13,9 @@ void LoadSounds(){
 
     AudioManager::coin_sound_ = LoadSound("assets/sounds/coin.wav");
     SetSoundVolume(AudioManager::coin_sound_, 0.15);
+
+    AudioManager::crash_sound_ = LoadSound("assets/sounds/crash.wav");
+    SetSoundVolume(AudioManager::crash_sound_, 0.15);
 
     AudioManager::shuffle_sound_ = LoadSound("assets/sounds/shuffle.mp3");
     AudioManager::deal_sound_ = LoadSound("assets/sounds/deal.mp3");

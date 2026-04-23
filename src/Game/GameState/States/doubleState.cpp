@@ -56,6 +56,7 @@ void DoubleState::Win(){
 }
 
 void DoubleState::Lose(){
+    PlaySound(AudioManager::crash_sound_);
     ChangeState(InitialState::Instance());
 }
 
