@@ -7,7 +7,10 @@ class AudioManager{
         static Sound coin_sound_;
         static Sound shuffle_sound_;
         static Sound deal_sound_;
+
+        static Music victory_music_;
 };
 
 void LoadSounds();
 void UnloadSounds();
+void UpdateMusic();

@@ -42,7 +42,7 @@ int main()
             cards.push_back(c);
         } */
 
-
+        UpdateMusic();
         BeginDrawing();
         ClearBackground(ScreenConstants::background_color_);
 
