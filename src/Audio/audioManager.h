@@ -9,6 +9,7 @@ class AudioManager{
         static Sound deal_sound_;
 
         static Music victory_music_;
+        static Music double_music_;
 };
 
 void LoadSounds();

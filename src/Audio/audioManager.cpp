@@ -5,6 +5,7 @@ Sound AudioManager::shuffle_sound_ = Sound{};
 Sound AudioManager::deal_sound_ = Sound{};
 
 Music AudioManager::victory_music_ = Music{};
+Music AudioManager::double_music_ = Music{};
 
 void LoadSounds(){
     InitAudioDevice();
@@ -18,6 +19,9 @@ void LoadSounds(){
     AudioManager::victory_music_ = LoadMusicStream("assets/sounds/victory_music.mp3");
     SetMusicVolume(AudioManager::victory_music_, 0.10);
 
+    AudioManager::double_music_ = LoadMusicStream("assets/sounds/double_music.mp3");
+    SetMusicVolume(AudioManager::double_music_, 0.10);
+
 
 }
 
@@ -30,4 +34,5 @@ void UnloadSounds(){
 
 void UpdateMusic(){
     UpdateMusicStream(AudioManager::victory_music_);
+    UpdateMusicStream(AudioManager::double_music_);
 }
