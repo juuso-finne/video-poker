@@ -2,6 +2,7 @@
 #include "../../Timer/timer.h"
 #include <vector>
 #include "../../Card/card.h"
+#include "../../Audio/audioManager.h"
 
 class Animation{
     public:
@@ -33,8 +34,11 @@ class DealAnimation: public Animation{
         DealAnimation(const std::vector<Vector2> &positions);
         bool IsPlaying() override;
         void Init() override;
+        void Update() override;
     private:
         std::vector<Vector2> positions_;
+        Timer stagger_timer_;
+        std::size_t current_position_;
 };
 
 class RevealAnimation: public Animation{

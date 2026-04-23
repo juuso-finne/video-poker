@@ -42,6 +42,7 @@ DealButton::DealButton(): Button(){
 }
 
 void DealButton::OnClick(){
+    PlaySound(AudioManager::button_sound_);
     GameData::state_ -> Deal();
 }
 
@@ -56,6 +57,12 @@ BetButton::BetButton(): Button(){
 
 void BetButton::OnClick(){
     GameData::state_ -> Bet();
+    float pitch_delta = (GameData::bet_ / 20) * 0.1;
+    float pitch = 0.5 + pitch_delta;
+
+    Sound pitched_button_sound = AudioManager::button_sound_;
+    SetSoundPitch(pitched_button_sound, pitch);
+    PlaySound(pitched_button_sound);
 }
 
 HoldButton::HoldButton(int index): Button(){
@@ -69,6 +76,7 @@ HoldButton::HoldButton(int index): Button(){
 }
 
 void HoldButton::OnClick(){
+    PlaySound(AudioManager::button_sound_);
     GameData::state_ -> Hold(index_);
 }
 

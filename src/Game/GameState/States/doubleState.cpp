@@ -6,11 +6,13 @@ DoubleState::DoubleState(){}
 DoubleState *DoubleState::Instance(){ return &double_state_; }
 
 void DoubleState::Init(){
+    PlayMusicStream(AudioManager::double_music_);
     ButtonManager::small_button_.enabled_ = true;
     ButtonManager::big_button_.enabled_ = true;
 }
 
 void DoubleState::Resolve(bool success){
+    StopMusicStream(AudioManager::double_music_);
     Gui::animations_.push(std::make_shared<RevealAnimation>());
     GameData::player_hand_[0].FaceUp();
     int rank = GameData::player_hand_[0].GetRank();
@@ -54,6 +56,7 @@ void DoubleState::Win(){
 }
 
 void DoubleState::Lose(){
+    PlaySound(AudioManager::crash_sound_);
     ChangeState(InitialState::Instance());
 }
 

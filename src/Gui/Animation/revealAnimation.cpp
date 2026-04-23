@@ -29,6 +29,7 @@ void RevealAnimation::Update(){
 
     for (Card &c: GameData::player_hand_){
         if(!c.is_face_up_){
+            PlaySound(AudioManager::flip_sound_);
             c.FaceUp();
             stagger_timer_.Reset();
             return;
