@@ -39,6 +39,7 @@ void DealAnimation::Update(){
     }
 
     stagger_timer_.Reset();
+    PlaySound(AudioManager::draw_sound_);
     Card card = GameData::deck_.DealOne();
     card.Move(positions_[current_position_], ScreenConstants::deal_speed_);
     GameData::player_hand_.push_back(card);

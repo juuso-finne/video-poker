@@ -5,6 +5,7 @@ Sound AudioManager::shuffle_sound_ = Sound{};
 Sound AudioManager::flip_sound_ = Sound{};
 Sound AudioManager::crash_sound_ = Sound{};
 Sound AudioManager::button_sound_ = Sound{};
+Sound AudioManager::draw_sound_ = Sound{};
 
 Music AudioManager::victory_music_ = Music{};
 Music AudioManager::double_music_ = Music{};
@@ -21,6 +22,9 @@ void LoadSounds(){
     AudioManager::shuffle_sound_ = LoadSound("assets/sounds/shuffle.mp3");
     AudioManager::flip_sound_ = LoadSound("assets/sounds/flip.mp3");
     AudioManager::button_sound_ = LoadSound("assets/sounds/button.wav");
+
+    AudioManager::draw_sound_ = LoadSound("assets/sounds/draw.wav");
+    SetSoundVolume(AudioManager::draw_sound_, 0.10);
 
     AudioManager::victory_music_ = LoadMusicStream("assets/sounds/victory_music.mp3");
     SetMusicVolume(AudioManager::victory_music_, 0.10);
