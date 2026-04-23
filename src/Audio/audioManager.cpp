@@ -2,7 +2,7 @@
 
 Sound AudioManager::coin_sound_ = Sound{};
 Sound AudioManager::shuffle_sound_ = Sound{};
-Sound AudioManager::deal_sound_ = Sound{};
+Sound AudioManager::flip_sound_ = Sound{};
 Sound AudioManager::crash_sound_ = Sound{};
 
 Music AudioManager::victory_music_ = Music{};
@@ -18,7 +18,7 @@ void LoadSounds(){
     SetSoundVolume(AudioManager::crash_sound_, 0.15);
 
     AudioManager::shuffle_sound_ = LoadSound("assets/sounds/shuffle.mp3");
-    AudioManager::deal_sound_ = LoadSound("assets/sounds/deal.mp3");
+    AudioManager::flip_sound_ = LoadSound("assets/sounds/flip.mp3");
 
     AudioManager::victory_music_ = LoadMusicStream("assets/sounds/victory_music.mp3");
     SetMusicVolume(AudioManager::victory_music_, 0.10);
@@ -32,7 +32,7 @@ void LoadSounds(){
 void UnloadSounds(){
     UnloadSound(AudioManager::coin_sound_);
     UnloadSound(AudioManager::shuffle_sound_);
-    UnloadSound(AudioManager::deal_sound_);
+    UnloadSound(AudioManager::flip_sound_);
     CloseAudioDevice();
 }
 
