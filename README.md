@@ -1,5 +1,9 @@
 # Video Poker #
 
+## About ##
+
+This is a personal hobby project made in C++ using the [Raylib](https://www.raylib.com/) library.
+
 ## How to play ##
 
 The goal of the game is to form a winning poker hand. Payouts are listed on the right hand side of the game window.
