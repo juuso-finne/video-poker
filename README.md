@@ -13,7 +13,7 @@ The deck contains one joker that acts as a wildcard.
 Set the desired bet by pressing the "Bet" button. Start the game by pressing the "Deal" button. You can hold any of your 5 cards by pressing the corresponding "Hold" button.
 If you win, you can collect your winnings ("Collect" button) or attempt to double ("Double" button).
 
-If you double, you will be dealt one card face down. Guess whether the card is "Small" (A-6) or "Big" (7-K) using the respective buttons. If you hit a red seven, you keep the original bet. If you hit a black seven, you automatically lose.
+If you double, you will be dealt one card face down. Guess whether the card is "Small" (A-6) or "Big" (8-K) using the respective buttons. If you hit a red seven, you keep the original bet. If you hit a black seven, you automatically lose.
 Winnings of up to and including 100 credits can be doubled again.
 
 <br/>
